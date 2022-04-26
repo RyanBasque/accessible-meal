@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "prepare": "husky install",
-    "commit": "git-cz"
+    "commit": "git add . && git-cz"
   },
   "dependencies": {
     "@commitlint/cli": "^16.2.3",
