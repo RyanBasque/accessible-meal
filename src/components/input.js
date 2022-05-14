@@ -7,6 +7,7 @@ const Input = ({ textLabel, ...props }) => {
         <>
             <TextInput 
                 style={styles.input}
+                placeholder={textLabel}
                 {...props} 
             />
         </>
@@ -22,9 +23,10 @@ export const styles = StyleSheet.create({
     input: {
         width: '100%',
         height: 40,
-        margin: 12,
+        marginVertical: 12,
         borderBottomWidth: 1,
-        padding: 10,
+        // padding: 10,
+        color: '#0000',
     },
   });
   

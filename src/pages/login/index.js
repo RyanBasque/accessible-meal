@@ -30,11 +30,4 @@ const Login = () => {
     );
 }
 
-const teste = StyleSheet.create({
-
-    a: {
-        marginTop: 90
-    }
-})
-
 export default Login;
