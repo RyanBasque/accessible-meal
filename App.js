@@ -1,12 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+
+import AuthProvider from './src/context/userContext';
+
 import CreateAccount from './src/pages/create-account';
 
 export default function App() {
   return (
-    <View>
-      <CreateAccount />
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <View>
+        <CreateAccount />
+        <StatusBar style="auto" />
+      </View>
+    </AuthProvider>
   );
 }

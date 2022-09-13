@@ -16,11 +16,11 @@ export const styles = StyleSheet.create({
     marginTop: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 30
+    marginBottom: 30,
   },
   title: {
     fontSize: 22,
-    color: '#292929'
+    color: '#292929',
   },
   inputContainer: {
     justifyContent: 'center',
@@ -30,5 +30,5 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     paddingHorizontal: 26,
     marginTop: 60,
-  }
+  },
 });
