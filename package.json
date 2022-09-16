@@ -1,14 +1,14 @@
 {
   "name": "accessible-meal",
   "version": "1.0.0",
+  "author": "Ryan Ladevig Basque",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject",
-    "commit": "git add . && git-cz"
+    "eject": "expo eject"
   },
   "dependencies": {
     "@commitlint/cli": "^16.2.3",
@@ -22,14 +22,7 @@
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "3.3.0"
+    "@babel/core": "^7.12.9"
   },
-  "private": true,
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  "private": true
 }

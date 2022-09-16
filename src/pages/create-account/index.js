@@ -91,6 +91,9 @@ function CreateAccount() {
   };
 
   const handlePostUserData = async (key, data, index) => {
+    const userWithoutPassword = user;
+    delete userWithoutPassword['password'];
+
     if (key && data) {
       const userData = { ...user, [key.toString()]: data };
       storeUser(userData);
@@ -101,7 +104,7 @@ function CreateAccount() {
 
       if (!localUserData) {
         try {
-          await storeLocalData('@user', user);
+          await storeLocalData('@user', userWithoutPassword);
         } catch (error) {
           console.error(error);
           alert("Erro na requisição");
@@ -109,7 +112,7 @@ function CreateAccount() {
       } else {
         try {
           await removeLocalValue('@user');
-          await storeLocalData('@user', user);
+          await storeLocalData('@user', userWithoutPassword);
         } catch (error) {
           console.error(error);
           alert("Erro na requisição");
