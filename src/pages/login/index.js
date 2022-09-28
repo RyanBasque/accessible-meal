@@ -1,21 +1,16 @@
-import {
-  View, Image, Text,
-} from 'react-native';
+import { View, Text } from 'react-native';
 
 import { styles } from './styles';
 
 import Input from '../../components/input';
 import ButtonPrimary from '../../components/buttonPrimary';
 import ButtonSecondary from '../../components/buttonSecondary';
+import Header from '../../components/header';
 
-const img = require('../../../assets/logo.png');
-
-function Login() {
+function Login({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={img} />
-      </View>
+      <Header />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Entrar com seus dados</Text>
       </View>
@@ -26,7 +21,7 @@ function Login() {
       <View style={styles.buttonContainer}>
         <ButtonPrimary text="ENTRAR" isActive />
         <View style={{ marginTop: 30 }}>
-          <ButtonSecondary text="CRIAR CONTA" />
+          <ButtonSecondary text="CRIAR CONTA" onPress={() => navigation.navigate('createAccount')} />
         </View>
       </View>
     </View>

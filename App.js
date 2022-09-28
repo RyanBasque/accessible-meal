@@ -3,15 +3,13 @@ import { View } from 'react-native';
 
 import AuthProvider from './src/context/userContext';
 
-import CreateAccount from './src/pages/create-account';
+import Routes from './src/routes';
 
 export default function App() {
   return (
     <AuthProvider>
-      <View>
-        <CreateAccount />
-        <StatusBar style="auto" />
-      </View>
+      <StatusBar style="auto" />
+      <Routes />
     </AuthProvider>
   );
 }

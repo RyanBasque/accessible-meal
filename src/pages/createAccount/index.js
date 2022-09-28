@@ -10,13 +10,13 @@ import CreateAccountPassword from '../../components/createAccountPassword';
 
 import showConfirmDialog from '../../utils/showConfirmDialog';
 
-import { 
+import {
   storeLocalData, 
   removeLocalValue, 
   getLocalData,
 } from '../../services/storage';
 
-function CreateAccount() {
+function CreateAccount({ navigation }) {
   const { user, storeUser } = useAuth();
 
   const [name, setName] = useState('');
@@ -128,7 +128,7 @@ function CreateAccount() {
       setName={setName}
       name={name}
       handleGetName={handleGetName}
-      handleBackStep={handleBackStep}
+      handleBackStep={() => { handleBackStep(); navigation.navigate('login') }}
     />,
     <CreateAccountEmail
       setEmail={setEmail}
