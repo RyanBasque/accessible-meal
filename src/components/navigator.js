@@ -1,10 +1,16 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 const Navigator = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-
+            <TouchableOpacity onPress={() => navigation.navigate('home')}>
+                <Ionicons name="home-outline" size={32} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('user')}>
+                <Ionicons name="person-outline" size={32} color="black" />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -15,9 +21,12 @@ const styles = StyleSheet.create({
     container: {
         height: 60,
         width: '100%',
-        backgroundColor: 'red',
+        borderWidth: 2,
+        borderTopColor: '#868b95',
         position: 'absolute',
         bottom: 0,
         justifyContent: 'space-around',
+        alignItems: 'center',
+        flexDirection: 'row',
     }
 });
