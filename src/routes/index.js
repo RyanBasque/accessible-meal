@@ -5,6 +5,7 @@ import CreateAccount from '../pages/createAccount';
 import Login from '../pages/login';
 import Home from '../pages/home';
 import User from '../pages/user';
+import Restaurant from '../pages/Restaurant';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const Routes = () => {
         }}
       >
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="restaurant" component={Restaurant} />
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="createAccount" component={CreateAccount} />
         <Stack.Screen name="user" component={User} />
