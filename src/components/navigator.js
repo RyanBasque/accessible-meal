@@ -6,10 +6,10 @@ const Navigator = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('home')}>
-                <Ionicons name="home-outline" size={32} color="black" />
+                <Ionicons name="home-outline" size={32} color="white" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('user')}>
-                <Ionicons name="person-outline" size={32} color="black" />
+                <Ionicons name="person-outline" size={32} color="white" />
             </TouchableOpacity>
         </View>
     );
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor: 'white'
+        backgroundColor: '#3154C5'
     }
 });

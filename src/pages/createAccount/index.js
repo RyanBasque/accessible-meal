@@ -67,8 +67,9 @@ function CreateAccount({ navigation }) {
     }
 
     try {
-      handlePostUserData(undefined, undefined, 5);
+      handlePostUserData(undefined, undefined, 4);
       // TODO: backend requisition
+      navigation.navigate('home')
     } catch (error) {
       alert("Erro na requisição");
     }
@@ -92,7 +93,9 @@ function CreateAccount({ navigation }) {
 
   const handlePostUserData = async (key, data, index) => {
     const userWithoutPassword = user;
-    delete userWithoutPassword['password'];
+    if (userWithoutPassword) {
+      delete userWithoutPassword['password'];
+    }
 
     if (key && data) {
       const userData = { ...user, [key.toString()]: data };

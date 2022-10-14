@@ -2,14 +2,21 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign'
 
-const Item = ({ name }) => (
-    <TouchableOpacity style={styles.item}>
-      <Text style={styles.name}>{name}</Text>
+const Item = ({ item, navigation }) => (
+    <TouchableOpacity 
+        style={styles.item} 
+        onPress={() => navigation.navigate('createRestaurant', item)}
+    >
+      <Text style={styles.name}>{item.name}</Text>
     </TouchableOpacity>
   );
 
-const Modal = ({ showModal, itens, onPress, onPressCreate, navigation }) => {
-    const renderItem = ({ item }) => <Item name={item.name} />
+const Modal = ({ showModal, itens, onPress, navigation }) => {
+    const renderItem = ({ item }) => 
+        <Item 
+            item={item}
+            navigation={navigation} 
+        />
 
     return (
         <>
@@ -19,7 +26,7 @@ const Modal = ({ showModal, itens, onPress, onPressCreate, navigation }) => {
                         <View style={styles.modalHeader}>
                             <AntDesign name="close" size={27} onPress={() => onPress(false)} />
                         </View>
-                        <TouchableOpacity onPress={() => navigation.navigate('home')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('createRestaurant')}>
                             <Text style={{ color: '#3154C5', marginBottom: 10 }}>Criar novo restaurante</Text>
                         </TouchableOpacity>
                         <FlatList

@@ -1,29 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Text, Image, ScrollView } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign'
+import * as ImagePicker from 'expo-image-picker';
 
 import Navigator from "../../components/navigator";
 import Input from "../../components/input";
 import RadioButton from "../../components/radioButton";
 import ButtonPrimary from "../../components/buttonPrimary";
 import ButtonSecondary from "../../components/buttonSecondary";
-import Modal from "../../components/modal";
 
-const User = ({ navigation }) => {
-    const [typePCD, setTypePCD] = useState([]);
-    const [password, setPassword] = useState();
-    const [showModal, setShowModal] = useState(false);
-    const [restaurantList] = useState([
-        { name: 'Restaurante do Seu Zé', key: 10823, email: 'seuze@gmail.com', typePCD: ['visual'], adress: 'Rua Mataripe Joaquim, 42' },
-        { name: 'Restaurante Colheita Feliz', key: 1082, email: 'colheitaFeliz@gmail.com', typePCD: ['visual', 'motora', 'mental'], adress: 'Rua Mataripe Joaquim, 42' },
-    ])
+const CreateRestaurant = ({ route, navigation }) => {
+    const { params } = route;
 
-    const handlePutData = () => {
+    const [name, setName] = useState(params?.name || '');
+    const [email, setEmail] = useState(params?.email || '');
+    const [typePCD, setTypePCD] = useState(params?.typePCD || []);
+    const [adress, setAdress] = useState(params?.adress || '');
+    const [menuPhoto, setMenuPhoto] = useState();
+    
 
+    const handlePutData = () => { 
+        
     };
 
     const handleReset = () => {
+        setEmail('');
+        setName('');
+        setTypePCD([]);
+        setAdress('');
+        setMenuPhoto(undefined);
+    };
 
+    const handlePickPhoto = async () => {
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [4, 3],
+                quality: 1,
+                base64: true,
+              });
+          
+              setMenuPhoto("data:image/png;base64," + result.base64);
+        } catch {
+            alert("Error");
+        }
     };
 
     return (
@@ -32,9 +53,6 @@ const User = ({ navigation }) => {
                 <View style={styles.logoContainer}>
                     <Image style={styles.img} source={require('../../../assets/logo.png')} />
                 </View>
-                <TouchableOpacity style={styles.plusIcon} onPress={() => setShowModal(true)}>
-                    <AntDesign name="plus" size={25} color="#3154C5" />
-                </ TouchableOpacity>
             </View>
             <ScrollView style={styles.container}>
                 <View style={styles.userIconContainer}>
@@ -44,24 +62,24 @@ const User = ({ navigation }) => {
                 </View>
                 <View style={styles.formContainer}>
                     <View style={styles.formInput}>
-                        <Input textLabel="NOME"  />
+                        <Input 
+                            textLabel="NOME DO RESTAURANTE" 
+                            onChangeText={setName} 
+                            defaultValue={name} />
                     </View>
                     <View style={styles.formInput}>
-                        <Input textLabel="EMAIL" />
+                        <Input 
+                            textLabel="EMAIL" 
+                            onChangeText={setEmail} 
+                            defaultValue={email} />
                     </View>
-                    <Text>DEFICIÊNCIA</Text>
+                    <Text>DEFICIÊNCIAS SUPORTADAS</Text>
                     <View style={{ marginTop: 10 }}>
-                        <TouchableOpacity
-                            style={styles.radio} 
-                            onPress={() => setTypePCD(atual => [...atual, 'visual'])}
-                        >
+                        <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'motora'])}>
                             <RadioButton selected={typePCD.includes('visual')} />
                             <Text>Deficiência visual</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity 
-                            style={styles.radio} 
-                            onPress={() => setTypePCD(atual => [...atual, 'motora'])}
-                        >
+                        <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'motora'])}>
                             <RadioButton selected={typePCD.includes('motora')} />
                             <Text>Deficiência motora</Text>
                         </TouchableOpacity>
@@ -75,37 +93,33 @@ const User = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.formInput}>
-                        <Input 
-                            secureTextEntry
-                            placeholder="Senha"
-                            onChangeText={setPassword} 
-                            defaultValue={password}
-                        />
+                        <TouchableOpacity style={{ width: '100%', height: 40, marginVertical: 12, borderBottomWidth: 1, color: 'black' }} onPress={handlePickPhoto}>
+                            <Text>CARDÁPIO</Text>
+                            <Image source={{ uri: menuPhoto }} style={styles.photo} />
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.formInput}>
                         <Input 
-                            secureTextEntry
-                            placeholder="Confirme sua senha"
-                            onChangeText={setPassword} 
-                            defaultValue={password}
-                        />
+                            textLabel="ENDEREÇO" 
+                            onChangeText={setAdress} 
+                            defaultValue={adress} />
+                    </View>
+                    <View style={styles.formInput}>
+                        <Input textLabel="SENHA" />
+                    </View>
+                    <View style={styles.formInput}>
+                        <Input textLabel="CONFIRME SUA SENHA" />
                     </View>
                     <ButtonPrimary text="CONTINUAR" onPress={handlePutData} />
                     <ButtonSecondary text="CANCELAR" onPress={handleReset} />
                 </View>
             </ScrollView>
             <Navigator navigation={navigation} />
-            <Modal
-                navigation={navigation}
-                showModal={showModal}
-                itens={restaurantList}
-                onPress={setShowModal}
-            />
         </>
     );
 };
 
-export default User;
+export default CreateRestaurant;
 
 const styles = StyleSheet.create({
     header: {
@@ -157,10 +171,19 @@ const styles = StyleSheet.create({
     },
     formInput: {
         marginVertical: 10,
+        position: 'relative',
     },
     radio: {
         marginVertical: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },
+    photo: {
+        width: 20, 
+        height: 20,
+        position: 'absolute',
+        top: 10,
+        right: 0,
+        borderRadius: 100
+    }
 });

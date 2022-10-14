@@ -19,7 +19,7 @@ function Login({ navigation }) {
         <Input placeholder="Digite sua senha" />
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonPrimary text="ENTRAR" isActive />
+        <ButtonPrimary text="ENTRAR" onPress={() => navigation.navigate('home')} />
         <View style={{ marginTop: 30 }}>
           <ButtonSecondary text="CRIAR CONTA" onPress={() => navigation.navigate('createAccount')} />
         </View>
