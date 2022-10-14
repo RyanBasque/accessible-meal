@@ -6,6 +6,7 @@ function Input({ textLabel, ...props }) {
     <TextInput
       style={styles.input}
       placeholder={textLabel}
+      placeholderTextColor="black"
       {...props}
     />
   );

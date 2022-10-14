@@ -20,7 +20,7 @@ export function CreateAccountName({ handleGetName, setName, name, handleBackStep
       </View>
       <View style={styles.footer}>
         <ButtonPrimary text="CONTINUAR" onPress={handleGetName} />
-        <ButtonSecondary text="Cancelar" onPress={handleBackStep} />
+        <ButtonSecondary text="Cancelar / Voltar" onPress={handleBackStep} />
       </View>
     </View>
   );
