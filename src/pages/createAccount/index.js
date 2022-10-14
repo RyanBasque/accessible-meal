@@ -21,6 +21,7 @@ function CreateAccount({ navigation }) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
   const [isPCD, setIsPCD] = useState(true);
   const [typePCD, setTypePCD] = useState([]);
   const [password, setPassword] = useState('');
@@ -41,6 +42,14 @@ function CreateAccount({ navigation }) {
     }
 
     handlePostUserData('email', email, 2);
+  }
+
+  const handleGetCpf = async () => {
+    if (!cpf) {
+      alert('Por favor, insira um CPF para continuar!');
+      return;
+    }
+    handlePostUserData('cpf', cpf, 1);
   }
 
   const handleGetIsPCD = async () => {
@@ -85,6 +94,7 @@ function CreateAccount({ navigation }) {
 
     setName('');
     setEmail('');
+    setCpf('');
     setIsPCD(true);
     setTypePCD([]);
     setPassword('');
@@ -137,6 +147,12 @@ function CreateAccount({ navigation }) {
       setEmail={setEmail}
       email={email}
       handleGetEmail={handleGetEmail}
+      handleBackStep={handleBackStep}
+    />,
+    <CreateAccountCpf
+      setCpf={setCpf}
+      cpf={cpf}
+      handleGetCpf={handleGetCpf}
       handleBackStep={handleBackStep}
     />,
     <CreateAccountIsPCD
