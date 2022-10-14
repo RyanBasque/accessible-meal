@@ -83,7 +83,7 @@ const CreateRestaurant = ({ route, navigation }) => {
                     </View>
                     <Text>DEFICIÊNCIAS SUPORTADAS</Text>
                     <View style={{ marginTop: 10 }}>
-                        <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'motora'])}>
+                        <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'visual'])}>
                             <RadioButton selected={typePCD.includes('visual')} />
                             <Text>Deficiência visual</Text>
                         </TouchableOpacity>
