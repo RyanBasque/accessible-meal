@@ -4,6 +4,7 @@ import { useAuth } from '../../context/userContext';
 
 import CreateAccountName from '../../components/createAccountName';
 import CreateAccountEmail from '../../components/createAccountEmail';
+import CreateAccountCpf from '../../components/createAccountCpf';
 import CreateAccountIsPCD from '../../components/createAccountIsPCD';
 import CreateAccountTypePCD from '../../components/createAccountTypePCD';
 import CreateAccountPassword from '../../components/createAccountPassword';
@@ -49,11 +50,11 @@ function CreateAccount({ navigation }) {
       alert('Por favor, insira um CPF para continuar!');
       return;
     }
-    handlePostUserData('cpf', cpf, 1);
+    handlePostUserData('cpf', cpf, 3);
   }
 
   const handleGetIsPCD = async () => {
-    handlePostUserData('isPCD', isPCD, isPCD ? 3 : 4);
+    handlePostUserData('isPCD', isPCD, isPCD ? 4 : 5);
   }
 
   const handleGetTypePCD = async () => {
@@ -65,7 +66,7 @@ function CreateAccount({ navigation }) {
     showConfirmDialog(
       "Continuar", 
       "Tem certeza que deseja continuar?",
-      () => handlePostUserData('typePCD', typePCD, 4),
+      () => handlePostUserData('typePCD', typePCD, 5),
     );
   };
 
@@ -76,7 +77,7 @@ function CreateAccount({ navigation }) {
     }
 
     try {
-      handlePostUserData(undefined, undefined, 4);
+      handlePostUserData(undefined, undefined, 5);
       // TODO: backend requisition
       navigation.navigate('home')
     } catch (error) {
@@ -92,13 +93,24 @@ function CreateAccount({ navigation }) {
       return;
     }
 
-    setName('');
-    setEmail('');
-    setCpf('');
-    setIsPCD(true);
-    setTypePCD([]);
-    setPassword('');
-    setRenderingScreen((n) => n - 1);
+    if (isPCD === true) {
+      setName('');
+      setEmail('');
+      setCpf('');
+      setIsPCD(true);
+      setTypePCD([]);
+      setPassword('');
+      setRenderingScreen((n) => n - 1);
+    }
+    else if (isPCD === false) {
+      setName('');
+      setEmail('');
+      setCpf('');
+      setIsPCD(true);
+      setTypePCD([]);
+      setPassword('');
+      setRenderingScreen((n) => n - 2);
+    }
   };
 
   const handlePostUserData = async (key, data, index) => {
