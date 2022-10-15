@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 
 import { useAuth } from '../../context/userContext';
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import CreateAccountName from '../../components/createAccountName';
 import CreateAccountEmail from '../../components/createAccountEmail';
 import CreateAccountCpf from '../../components/createAccountCpf';
+import CreateAccountAddress from '../../components/createAccountAddress';
 import CreateAccountIsPCD from '../../components/createAccountIsPCD';
 import CreateAccountTypePCD from '../../components/createAccountTypePCD';
 import CreateAccountPassword from '../../components/createAccountPassword';
@@ -23,10 +26,52 @@ function CreateAccount({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [cpf, setCpf] = useState('');
+  const [address, setAddress] = useState('');
   const [isPCD, setIsPCD] = useState(true);
   const [typePCD, setTypePCD] = useState([]);
+  const [typePCDString, setTypePCDString] = useState('');
   const [password, setPassword] = useState('');
   const [renderingScreen, setRenderingScreen] = useState(0);
+  const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  })
+
+  const register = async () => {
+    try {
+      let obj;
+      if (isPCD === true) {
+        obj = {
+          name: name,
+          email: email,
+          cpf: cpf,
+          address: address,
+          isPCD: isPCD,
+          typePCD: JSON.stringify(typePCD),
+          password: password
+        }
+      }
+      else if (isPCD === false) {
+        obj = {
+          name: name,
+          email: email,
+          cpf: cpf,
+          address: address,
+          isPCD: isPCD,
+          password: password
+        }
+      }
+
+      let req = await api.post('/api/cliente/', obj, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      //await AsyncStorage.setItem('userData', req.data)
+
+    }catch(err) {
+      console.log(err);
+      alert("Erro para montar requisição");
+    }
+  }
 
   const handleGetName = async () => {
     if (!name) {
@@ -53,8 +98,16 @@ function CreateAccount({ navigation }) {
     handlePostUserData('cpf', cpf, 3);
   }
 
+  const handleGetAddress = async () => {
+    if (!address) {
+      alert('Por favor, insira um endereço para continuar!');
+      return;
+    }
+    handlePostUserData('address', address, 4);
+  }
+
   const handleGetIsPCD = async () => {
-    handlePostUserData('isPCD', isPCD, isPCD ? 4 : 5);
+    handlePostUserData('isPCD', isPCD, isPCD ? 5 : 6);
   }
 
   const handleGetTypePCD = async () => {
@@ -66,7 +119,8 @@ function CreateAccount({ navigation }) {
     showConfirmDialog(
       "Continuar", 
       "Tem certeza que deseja continuar?",
-      () => handlePostUserData('typePCD', typePCD, 5),
+      () => 
+      handlePostUserData('typePCD', typePCD, 6),
     );
   };
 
@@ -77,8 +131,10 @@ function CreateAccount({ navigation }) {
     }
 
     try {
-      handlePostUserData(undefined, undefined, 5);
+      handlePostUserData(undefined, undefined, 7);
       // TODO: backend requisition
+      register();
+
       navigation.navigate('home')
     } catch (error) {
       alert("Erro na requisição");
@@ -97,8 +153,10 @@ function CreateAccount({ navigation }) {
       setName('');
       setEmail('');
       setCpf('');
+      setAddress('');
       setIsPCD(true);
       setTypePCD([]);
+      setTypePCDString('');
       setPassword('');
       setRenderingScreen((n) => n - 1);
     }
@@ -106,8 +164,10 @@ function CreateAccount({ navigation }) {
       setName('');
       setEmail('');
       setCpf('');
+      setAddress('');
       setIsPCD(true);
       setTypePCD([]);
+      setTypePCDString('');
       setPassword('');
       setRenderingScreen((n) => n - 2);
     }
@@ -165,6 +225,12 @@ function CreateAccount({ navigation }) {
       setCpf={setCpf}
       cpf={cpf}
       handleGetCpf={handleGetCpf}
+      handleBackStep={handleBackStep}
+    />,
+    <CreateAccountAddress
+      setAddress={setAddress}
+      address={address}
+      handleGetAddress={handleGetAddress}
       handleBackStep={handleBackStep}
     />,
     <CreateAccountIsPCD
