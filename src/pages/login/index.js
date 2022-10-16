@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 
 import { View, Text } from 'react-native';
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { styles } from './styles';
 
@@ -9,10 +10,17 @@ import Input from '../../components/input';
 import ButtonPrimary from '../../components/buttonPrimary';
 import ButtonSecondary from '../../components/buttonSecondary';
 import Header from '../../components/header';
+import { useAuth } from '../../context/userContext';
+import { stringifyValueWithProperty } from 'react-native-web/dist/cjs/exports/StyleSheet/compiler';
 
 function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [items, setItems] = useState([]);
+  const [nameResponse, setNameResponse] = useState('');
+  const [emailResponse, setEmailResponse] = useState('');
+  const [isPCDResponse, setIsPCDResponse] = useState(false);
+
 
   const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  })
 
@@ -28,8 +36,8 @@ function Login({ navigation }) {
           'Content-Type': 'application/json'
         }
       })
-
-      //await AsyncStorage.setItem('userData', req.data)
+      console.log(req.data);
+      useContext.useAuth;
 
     }catch(err) {
       console.log(err);
@@ -54,7 +62,7 @@ function Login({ navigation }) {
           />
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonPrimary text="ENTRAR" onPress={() => navigation.navigate('home')} />
+        <ButtonPrimary text="ENTRAR" onPress={() => {login(); navigation.navigate('home')} } />
         <View style={{ marginTop: 30 }}>
           <ButtonSecondary text="CRIAR CONTA" onPress={() => navigation.navigate('createAccount')} />
         </View>
