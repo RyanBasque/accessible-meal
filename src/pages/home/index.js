@@ -8,7 +8,6 @@ import Header from '../../components/header'
 import HomeRestaurantModal from '../../components/homeRestaurantModal'
 import { useState } from 'react';
 import axios from "axios";
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Home = ({ navigation }) => {
 
@@ -40,10 +39,6 @@ const Home = ({ navigation }) => {
                 <Header />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
                     <InputSearch placeholder={'Busque por restaurante'} />
-                    <TouchableOpacity style={{ marginTop: 20 }} onPress={() => navigation.navigate('chatbot')}>
-                        <AntDesign name="plus" size={25} color="#3154C5" />
-                        {/* <RobotOutlined /> */}
-                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <HomeRestaurantModal

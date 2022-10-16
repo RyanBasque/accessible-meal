@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 import Header from './header';
 import ButtonPrimary from './buttonPrimary';
 import ButtonSecondary from './buttonSecondary';
 import RadioButton from './radioButton';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function HomeRestaurantModal({ name, classification, typePCD, address, navigation }) {
+function HomeRestaurantModal({ name, classification, typePCD, address }) {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('user')}
+      onPress={() => navigation.navigate('login')}
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',

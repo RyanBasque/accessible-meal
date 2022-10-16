@@ -6,10 +6,13 @@ const Navigator = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('home')}>
-                <Ionicons name="home-outline" size={32} color="white" />
+                <Ionicons name="home" size={32} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('chatbot')}>
+                <Ionicons name="mic" size={32} color="white" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('user')}>
-                <Ionicons name="person-outline" size={32} color="white" />
+                <Ionicons name="person" size={32} color="white" />
             </TouchableOpacity>
         </View>
     );

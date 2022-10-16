@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
   },
   input: {
-    width: '80%',
+    width: '100%',
     height: 40,
     marginVertical: 12,
     borderBottomWidth: 1,
