@@ -7,18 +7,16 @@ import ButtonSecondary from './buttonSecondary';
 import RadioButton from './radioButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function HomeRestaurantModal({ name, classification, typePCD, address, navigation }) {
+function CardDetailRestaurant({ name, classification, typePCD, address }) {
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('user')}
+    <View
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 10,
         marginVertical: 4,
-        padding: 10,
+        padding: 30,
+        marginTop: 0,
+        backgroundColor: '#3154C5'
       }}>
       <View
         style={{
@@ -33,17 +31,17 @@ function HomeRestaurantModal({ name, classification, typePCD, address, navigatio
           flex: 3,
           flexDirection: 'column'
         }}>
-        <Text style={{ fontWeight: 'normal', fontSize: 18, color: '#333' }}>
+        <Text style={{ fontWeight: 'normal', fontSize: 19, color: '#fff' }}>
           {name}
         </Text>
-        <Text style={{ fontWeight: 'light', fontSize: 12, color: '#555' }}>
+        <Text style={{ fontWeight: 'light', fontSize: 14, color: '#fff' }}>
           {classification} - {typePCD}
         </Text>
-        <Text style={{ fontWeight: 'light', fontSize: 12, color: '#555' }}>
+        <Text style={{ fontWeight: 'light', fontSize: 14, color: '#fff' }}>
           {address}
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -58,8 +56,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   img: {
-    width: 50,
-    height: 50,
+    width: '90%',
+    height: 60,
     marginLeft: 5
   },
   subTitle: {
@@ -82,4 +80,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default HomeRestaurantModal;
+export default CardDetailRestaurant;
