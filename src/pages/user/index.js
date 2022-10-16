@@ -14,8 +14,8 @@ const User = ({ navigation }) => {
     const [password, setPassword] = useState();
     const [showModal, setShowModal] = useState(false);
     const [restaurantList] = useState([
-        { name: 'Restaurante do Seu Zé', key: 10823, email: 'seuze@gmail.com', typePCD: ['visual'], adress: 'Rua Mataripe Joaquim, 42' },
-        { name: 'Restaurante Colheita Feliz', key: 1082, email: 'colheitaFeliz@gmail.com', typePCD: ['visual', 'motora', 'mental'], adress: 'Rua Mataripe Joaquim, 42' },
+        /*{ name: 'Restaurante do Seu Zé', key: 10823, email: 'seuze@gmail.com', typePCD: ['visual'], adress: 'Rua Mataripe Joaquim, 42' },
+        { name: 'Restaurante Colheita Feliz', key: 1082, email: 'colheitaFeliz@gmail.com', typePCD: ['visual', 'motora', 'mental'], adress: 'Rua Mataripe Joaquim, 42' },*/
     ])
 
     const handlePutData = () => {

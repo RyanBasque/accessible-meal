@@ -29,7 +29,6 @@ function CreateAccount({ navigation }) {
   const [address, setAddress] = useState('');
   const [isPCD, setIsPCD] = useState(true);
   const [typePCD, setTypePCD] = useState([]);
-  const [typePCDString, setTypePCDString] = useState('');
   const [password, setPassword] = useState('');
   const [renderingScreen, setRenderingScreen] = useState(0);
   const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  })
@@ -135,7 +134,7 @@ function CreateAccount({ navigation }) {
       // TODO: backend requisition
       register();
 
-      navigation.navigate('home')
+      navigation.navigate('login')
     } catch (error) {
       alert("Erro na requisição");
     }
@@ -156,7 +155,6 @@ function CreateAccount({ navigation }) {
       setAddress('');
       setIsPCD(true);
       setTypePCD([]);
-      setTypePCDString('');
       setPassword('');
       setRenderingScreen((n) => n - 1);
     }
@@ -167,7 +165,6 @@ function CreateAccount({ navigation }) {
       setAddress('');
       setIsPCD(true);
       setTypePCD([]);
-      setTypePCDString('');
       setPassword('');
       setRenderingScreen((n) => n - 2);
     }
