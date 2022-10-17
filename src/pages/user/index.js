@@ -59,22 +59,22 @@ const User = ({ navigation }) => {
                             style={styles.radio} 
                             onPress={() => setTypePCD(atual => [...atual, 'visual'])}
                         >
-                            <RadioButton selected={typePCD.includes('visual')} />
+                            <RadioButton selected={user?.typePCD.includes('visual') ||  typePCD.includes('visual')} />
                             <Text>Deficiência visual</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style={styles.radio} 
                             onPress={() => setTypePCD(atual => [...atual, 'motora'])}
                         >
-                            <RadioButton selected={typePCD.includes('motora')} />
+                            <RadioButton selected={user?.typePCD.includes('motora') ||  typePCD.includes('motora')} />
                             <Text>Deficiência motora</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'mental'])}>
-                            <RadioButton selected={typePCD.includes('mental')} />
+                            <RadioButton selected={user?.typePCD.includes('mental') ||  typePCD.includes('mental')} />
                             <Text>Deficiência mental</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'auditiva'])}>
-                            <RadioButton selected={typePCD.includes('auditiva')} />
+                            <RadioButton selected={user?.typePCD.includes('auditiva') ||  typePCD.includes('auditiva')} />
                             <Text>Deficiência auditiva</Text>
                         </TouchableOpacity>
                     </View>
