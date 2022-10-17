@@ -48,10 +48,10 @@ const User = ({ navigation }) => {
                 </View>
                 <View style={styles.formContainer}>
                     <View style={styles.formInput}>
-                        <Input textLabel="NOME" defaultValue={user.name} />
+                        <Input textLabel="NOME" defaultValue={user.name || ""} />
                     </View>
                     <View style={styles.formInput}>
-                        <Input textLabel="EMAIL" />
+                        <Input textLabel="EMAIL" defaultValue={user.email || ""} />
                     </View>
                     <Text>DEFICIÊNCIA</Text>
                     <View style={{ marginTop: 10 }}>
