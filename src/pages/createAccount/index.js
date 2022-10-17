@@ -31,13 +31,15 @@ function CreateAccount({ navigation }) {
   const [typePCD, setTypePCD] = useState([]);
   const [password, setPassword] = useState('');
   const [renderingScreen, setRenderingScreen] = useState(0);
-  const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  })
+
+  const api = axios.create({ baseURL: 'http://10.0.2.2:8080', })
 
   const register = async () => {
     try {
-      let obj;
-      if (isPCD === true) {
-        obj = {
+      let params;
+
+      if (isPCD) {
+        params = {
           name: name,
           email: email,
           cpf: cpf,
@@ -46,28 +48,25 @@ function CreateAccount({ navigation }) {
           typePCD: JSON.stringify(typePCD),
           password: password
         }
-      }
-      else if (isPCD === false) {
-        obj = {
+      } else {
+        params = {
           name: name,
           email: email,
           cpf: cpf,
           address: address,
           isPCD: isPCD,
           password: password
-        }
+        };
+        
       }
 
-      let req = await api.post('/api/cliente/', obj, {
+      await api.post('/api/cliente/', params, {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
+      });
 
-      //await AsyncStorage.setItem('userData', req.data)
-
-    }catch(err) {
-      console.log(err);
+    } catch {
       alert("Erro para montar requisição");
     }
   }
@@ -131,7 +130,6 @@ function CreateAccount({ navigation }) {
 
     try {
       handlePostUserData(undefined, undefined, 7);
-      // TODO: backend requisition
       register();
 
       navigation.navigate('login')

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Text, Image, ScrollView } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign'
+
+import { useAuth } from "../../context/userContext";
 
 import Navigator from "../../components/navigator";
 import Input from "../../components/input";
@@ -10,6 +12,8 @@ import ButtonSecondary from "../../components/buttonSecondary";
 import Modal from "../../components/modal";
 
 const User = ({ navigation }) => {
+    const { user } = useAuth();
+
     const [typePCD, setTypePCD] = useState([]);
     const [password, setPassword] = useState();
     const [showModal, setShowModal] = useState(false);
@@ -44,7 +48,7 @@ const User = ({ navigation }) => {
                 </View>
                 <View style={styles.formContainer}>
                     <View style={styles.formInput}>
-                        <Input textLabel="NOME"  />
+                        <Input textLabel="NOME" defaultValue={user.name} />
                     </View>
                     <View style={styles.formInput}>
                         <Input textLabel="EMAIL" />

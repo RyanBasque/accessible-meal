@@ -14,6 +14,8 @@ import { useAuth } from '../../context/userContext';
 import { stringifyValueWithProperty } from 'react-native-web/dist/cjs/exports/StyleSheet/compiler';
 
 function Login({ navigation }) {
+  const { user, storeUser } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [items, setItems] = useState([]);
@@ -21,8 +23,7 @@ function Login({ navigation }) {
   const [emailResponse, setEmailResponse] = useState('');
   const [isPCDResponse, setIsPCDResponse] = useState(false);
 
-
-  const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  })
+  const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  });
 
   const login = async () => {
     try {
@@ -31,14 +32,15 @@ function Login({ navigation }) {
         password: password
       }
 
-      let req = await api.post('/api/cliente/login/', obj, {
+      let { data } = await api.post('/api/cliente/login/', obj, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      console.log(req.data);
 
-    }catch(err) {
+      storeUser(data);
+
+    } catch(err) {
       console.log(err);
       alert("Erro para montar requisição");
     }
