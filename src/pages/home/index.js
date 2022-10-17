@@ -1,28 +1,38 @@
-import { useCallback } from 'react';
-import { View, FlatList, ScrollView } from 'react-native';
-
+import { View, FlatList, ScrollView, Text } from 'react-native';
 import Navigator from '../../components/navigator';
+// import { RobotOutlined } from '@ant-design/icons';
+import AntDesign from '@expo/vector-icons/AntDesign'
+
 import InputSearch from '../../components/inputSearch'
 import Header from '../../components/header'
 import HomeRestaurantModal from '../../components/homeRestaurantModal'
-
-import { getData } from '../../services';
+import { useState } from 'react';
+import axios from "axios";
 
 const Home = ({ navigation }) => {
 
-    const restaurants = useCallback(async () => {
+    const [name, setName] = useState('');
+    const [typePCD, setTypePCD] = useState('');
+    const [address, setAddress] = useState('');
+    const [restaurantList, setRestaurantList] = useState([]);
+    const api = axios.create({ baseURL: 'http://10.0.2.2:8080', })
+
+    const loadRestaurants = async () => {
         try {
-            const { data: restaurantList } = await getData('/api/restaurante/');
-
-            return JSON.parse(restaurantList);
-        } catch {
+            let req = await api.get('/api/restaurante/').then(
+                function (response) {
+                    var jsonData = JSON.parse(response);
+                    for (var i = 0; i < jsonData.data.length; i++) {
+                        var restaurant = jsonData.data[i];
+                        setRestaurantList(atual => [...atual, restaurant])
+                    }
+                }
+            )
+        } catch (err) {
             alert('Falha ao resgatar os restaurantes cadastrados')
-
-            return [];
+            console.log(err)
         }
-    }, []);
-
-
+    }
     return (
         <>
             <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
@@ -31,20 +41,43 @@ const Home = ({ navigation }) => {
                     <InputSearch placeholder={'Busque por restaurante'} />
                 </View>
                 <ScrollView>
-                    {
-                        restaurants.length ? restaurants.map(({ id, name, address, typePCD }) => {
-                            return (
-                                <HomeRestaurantModal
-                                    name={name}
-                                    classification={'0.0'}
-                                    typePCD={'visual'}
-                                    address={address} 
-                                    key={id}
-                                />
-                            )
-                        }) : <></>
-                    }
+                    <HomeRestaurantModal
+                        name={'Melts'}
+                        classification={'0.0'}
+                        typePCD={'visual'}
+                        address={'Rua Horace Clark, 45'} />
+                    <HomeRestaurantModal
+                        name={'Cantareira Ltda'}
+                        classification={'0.0'}
+                        typePCD={'mental'}
+                        address={'Rua Orlando de Morais, 1010'} />
+                    <HomeRestaurantModal
+                        name={'Food True'}
+                        classification={'0.0'}
+                        typePCD={'motora'}
+                        address={'Av Nazaréh, 2456'} />
+                    <HomeRestaurantModal
+                        name={'Saborosos Pratos Ltda'}
+                        classification={'0.0'}
+                        typePCD={'auditiva'}
+                        address={'Av Santos Silva, 81'} />
+                    <HomeRestaurantModal
+                        name={'Delicias Casa da Vovó Ltda'}
+                        classification={'0.0'}
+                        typePCD={'auditiva'}
+                        address={'Av Santos Silva, 81'} />
+                    <HomeRestaurantModal
+                        name={'Restaurante da cidade'}
+                        classification={'0.0'}
+                        typePCD={'auditiva'}
+                        address={'Av Santos Silva, 81'} />
                 </ScrollView>
+                {/* <FlatList
+                    data={restaurantList}
+                    renderItem={(obj) => (
+                      <HomeRestaurantModal {...obj} />
+                    )}
+                /> */}
             </View>
             <Navigator navigation={navigation} />
         </>
