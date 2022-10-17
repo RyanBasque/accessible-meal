@@ -26,23 +26,26 @@ function Login({ navigation }) {
   const api = axios.create({ baseURL: 'http://10.0.2.2:8080',  });
 
   const login = async () => {
-    try {
-      let obj = {
-        email: email,
-        password: password
-      }
+    if (!email || !password) {
+      alert('Coloque e-mail e senha para continuar!');
+      return
+    };
 
-      let { data } = await api.post('/api/cliente/login/', obj, {
+    try {
+      const params = { email, password };
+
+      let { data } = await api.post('/api/cliente/login/', params, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
 
       storeUser(data);
+      navigation.navigate('home');
 
     } catch(err) {
       console.log(err);
-      alert("Erro para montar requisição");
+      alert("E-mal ou senha inválidos.");
     }
   }
 
@@ -63,7 +66,7 @@ function Login({ navigation }) {
           />
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonPrimary text="ENTRAR" onPress={() => {login(); navigation.navigate('home')} } />
+        <ButtonPrimary text="ENTRAR" onPress={login} />
         <View style={{ marginTop: 30 }}>
           <ButtonSecondary text="CRIAR CONTA" onPress={() => navigation.navigate('createAccount')} />
         </View>
