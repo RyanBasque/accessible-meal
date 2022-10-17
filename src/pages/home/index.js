@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
                 </View>
                 <ScrollView>
                     {
-                        restaurants.map(({ id, name, address, typePCD }) => {
+                        restaurants.length ? restaurants.map(({ id, name, address, typePCD }) => {
                             return (
                                 <HomeRestaurantModal
                                     name={name}
@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
                                     key={id}
                                 />
                             )
-                        })
+                        }) : <></>
                     }
                 </ScrollView>
             </View>
