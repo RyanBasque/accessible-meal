@@ -1,7 +1,7 @@
 import { View, FlatList, ScrollView, Text } from 'react-native';
 import Navigator from '../../components/navigator';
 // import { RobotOutlined } from '@ant-design/icons';
-import AntDesign from '@expo/vector-icons/AntDesign'
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 import InputSearch from '../../components/inputSearch'
 import Header from '../../components/header'
@@ -37,8 +37,8 @@ const Home = ({ navigation }) => {
         <>
             <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
                 <Header />
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
-                    <InputSearch placeholder={'Busque por restaurante'} />
+                <View style={{ flexDirection: 'row' }} >
+                    <InputSearch placeholder={'Busque por restaurante'} /><Ionicons name="search" size={14} color='black' />
                 </View>
                 <ScrollView>
                     <HomeRestaurantModal

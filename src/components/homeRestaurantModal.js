@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 import Header from './header';
 import ButtonPrimary from './buttonPrimary';
@@ -36,7 +37,7 @@ function HomeRestaurantModal({ name, classification, typePCD, address }) {
           {name}
         </Text>
         <Text style={{ fontWeight: 'light', fontSize: 12, color: '#555' }}>
-          {classification} - {typePCD}
+          <Ionicons name="star-outline" size={14} color='black' />{classification} -- {typePCD}
         </Text>
         <Text style={{ fontWeight: 'light', fontSize: 12, color: '#555' }}>
           {address}

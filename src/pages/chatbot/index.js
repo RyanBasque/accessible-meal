@@ -6,8 +6,9 @@ import * as Speech from "expo-speech";
 import axios from "axios";
 import base64 from 'react-native-base64';
 import Navigator from '../../components/navigator';
+import Header from "../../components/header";
 
-export default function Chatbot ({ navigation }) {
+export default function Chatbot({ navigation }) {
     const [permission, setPermission] = React.useState("");
     const [recording, setRecording] = React.useState("");
 
@@ -21,18 +22,18 @@ export default function Chatbot ({ navigation }) {
         const encodedKey = base64.encode(`apikey:${key}`)
         const baseUrl = 'https://api.us-south.assistant.watson.cloud.ibm.com/instances/95a280d6-bcc5-4145-8b77-9dd1dc47a386/v1/workspaces/ce71c9d2-0c4c-4fd5-b810-e32bfb81bc27/message'
 
-        try{
+        try {
             const request = await axios.post(baseUrl.concat('?version=2018-09-20'),
-                { input: { text: value}},
+                { input: { text: value } },
                 { headers: { Authorization: `Basic ${encodedKey}`, 'Content-Type': 'application/json' } });
 
             const response = request.data.output.text[0]
 
-            if(response === undefined) Speech.speak('Eu não entendi, você pode reformular a frase')
+            if (response === undefined) Speech.speak('Eu não entendi, você pode reformular a frase')
             setBotResponse(response)
         }
 
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
@@ -94,17 +95,20 @@ export default function Chatbot ({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <Header />
             <Text>{permission}</Text>
-            <Button
-                title={recording ? "PARAR" : "GRAVAR"}
-                onPress={recording ? stopRecording : startRecording}
-            />
-
-            <View>
-                <Text>USUÁRIO :{userInput}</Text>
-                <Text>CHATBOT :{botResponse}</Text>
+            <View style={{marginTop: 10}}>
+                <Text style={{fontSize: 30}}>Usuário :</Text>
+                <Text style={{fontSize: 20}}>{userInput}</Text>
+                <Text style={{fontSize: 30}}>Bot :</Text>
+                <Text style={{color: 'green', fontSize: 20}}>{botResponse}</Text>
             </View>
-
+            <View style={{marginTop: 225, width: '100%'}}>
+                <Button
+                    title={recording ? "PARAR" : "GRAVAR"}
+                    onPress={recording ? stopRecording : startRecording}
+                />
+            </View>
             <StatusBar style="auto" />
             <Navigator navigation={navigation} />
         </View>
@@ -114,8 +118,6 @@ export default function Chatbot ({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: "#fff"
     }
 });
