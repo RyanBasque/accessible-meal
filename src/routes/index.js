@@ -3,9 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import CreateAccount from '../pages/createAccount';
 import Login from '../pages/login';
+import Chatbot from '../pages/chatbot';
 import Home from '../pages/home';
 import User from '../pages/user'; 
 import CreateRestaurant from '../pages/createRestaurant';
+import RestaurantDetails from '../pages/restaurantDetails'
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +20,10 @@ const Routes = () => {
           animation: 'none',
         }}
       >
-        <Stack.Screen name="user" component={User} />
         <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="restaurantDetails" component={RestaurantDetails} />
+        <Stack.Screen name="chatbot" component={Chatbot} />
+        <Stack.Screen name="user" component={User} />
         <Stack.Screen name="createRestaurant" component={CreateRestaurant} />
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="createAccount" component={CreateAccount} />

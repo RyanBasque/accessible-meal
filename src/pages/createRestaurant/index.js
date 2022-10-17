@@ -14,8 +14,9 @@ const CreateRestaurant = ({ route, navigation }) => {
 
     const [name, setName] = useState(params?.name || '');
     const [email, setEmail] = useState(params?.email || '');
+    const [cnpj, setCnpj] = useState('');
     const [typePCD, setTypePCD] = useState(params?.typePCD || []);
-    const [adress, setAdress] = useState(params?.adress || '');
+    const [address, setAddress] = useState(params?.address || '');
     const [menuPhoto, setMenuPhoto] = useState();
     
 
@@ -26,8 +27,9 @@ const CreateRestaurant = ({ route, navigation }) => {
     const handleReset = () => {
         setEmail('');
         setName('');
+        setCnpj('');
         setTypePCD([]);
-        setAdress('');
+        setAddress('');
         setMenuPhoto(undefined);
     };
 
@@ -73,9 +75,15 @@ const CreateRestaurant = ({ route, navigation }) => {
                             onChangeText={setEmail} 
                             defaultValue={email} />
                     </View>
+                    <View style={styles.formInput}>
+                        <Input 
+                            textLabel="CNPJ" 
+                            onChangeText={setCnpj} 
+                            defaultValue={cnpj} />
+                    </View>
                     <Text>DEFICIÊNCIAS SUPORTADAS</Text>
                     <View style={{ marginTop: 10 }}>
-                        <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'motora'])}>
+                        <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'visual'])}>
                             <RadioButton selected={typePCD.includes('visual')} />
                             <Text>Deficiência visual</Text>
                         </TouchableOpacity>
@@ -101,8 +109,8 @@ const CreateRestaurant = ({ route, navigation }) => {
                     <View style={styles.formInput}>
                         <Input 
                             textLabel="ENDEREÇO" 
-                            onChangeText={setAdress} 
-                            defaultValue={adress} />
+                            onChangeText={setAddress} 
+                            defaultValue={address} />
                     </View>
                     <View style={styles.formInput}>
                         <Input textLabel="SENHA" />
