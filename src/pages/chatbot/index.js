@@ -6,6 +6,7 @@ import * as Speech from "expo-speech";
 import axios from "axios";
 import base64 from 'react-native-base64';
 import Navigator from '../../components/navigator';
+import Header from "../../components/header";
 
 export default function Chatbot ({ navigation }) {
     const [permission, setPermission] = React.useState("");
@@ -94,15 +95,19 @@ export default function Chatbot ({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <Header />
             <Text>{permission}</Text>
-            <Button
-                title={recording ? "PARAR" : "GRAVAR"}
-                onPress={recording ? stopRecording : startRecording}
-            />
-
-            <View>
-                <Text>USUÁRIO :{userInput}</Text>
-                <Text>CHATBOT :{botResponse}</Text>
+            <View style={{marginTop: 10}}>
+                <Text style={{fontSize: 30}}>Usuário :</Text>
+                <Text style={{fontSize: 20}}>{userInput}</Text>
+                <Text style={{fontSize: 30}}>Bot :</Text>
+                <Text style={{color: 'green', fontSize: 20}}>{botResponse}</Text>
+            </View>
+            <View style={{width: '100%', marginTop: 50}}>
+                <Button
+                    title={recording ? "PARAR" : "GRAVAR"}
+                    onPress={recording ? stopRecording : startRecording}
+                />
             </View>
 
             <StatusBar style="auto" />

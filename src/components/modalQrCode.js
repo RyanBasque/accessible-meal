@@ -13,7 +13,7 @@ const ModalQrCode = ({ showModal, onPress }) => {
                             <Ionicons name="close" size={27} onPress={() => onPress(false)} />
                         </View>
                         <View>
-                            <Image style={{width: '70%', height: '70%', marginTop: 15, marginBottom: 10, marginLeft: 30}} source={require('../../assets/qrcode.png')} />
+                            <Image style={{width: '100%', height: '70%', marginTop: 15, marginBottom: 10}} source={require('../../assets/qrcode.png')} />
                             <ButtonPrimary text="SALVAR QR CODE"/>
                         </View>
                     </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         flexDirection: 'column',
         justifyContent: 'space-around',
-        borderRadius: 10
+        borderRadius: 5
     },
     modalHeader: {
         alignItems: 'flex-end',

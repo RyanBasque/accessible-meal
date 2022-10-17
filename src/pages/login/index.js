@@ -37,7 +37,6 @@ function Login({ navigation }) {
         }
       })
       console.log(req.data);
-      useContext.useAuth;
 
     }catch(err) {
       console.log(err);

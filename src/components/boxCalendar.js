@@ -27,11 +27,13 @@ function BoxCalendar({navigation}) {
                 />
                 <ButtonPrimary text="GERAR QR CODE" onPress={() => setShowModal(true)}/>
             </View>
-            <ModalQrCode
-                navigation={navigation}
-                showModal={showModal}
-                onPress={setShowModal}
-            />
+            <View>
+                <ModalQrCode
+                    navigation={navigation}
+                    showModal={showModal}
+                    onPress={setShowModal}
+                />
+            </View>
         </View>
 
     );
