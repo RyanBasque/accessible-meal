@@ -21,7 +21,8 @@ function BoxCalendar({navigation}) {
                 style={{
                     backgroundColor: '#B9B9B9',
                     height: 60,
-                    marginBottom: 10
+                    marginBottom: 10,
+                    borderRadius: 10
                 }}
                 />
                 <ButtonPrimary text="GERAR QR CODE" onPress={() => setShowModal(true)}/>

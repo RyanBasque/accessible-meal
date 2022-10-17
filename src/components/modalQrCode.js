@@ -1,34 +1,19 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import ButtonPrimary from './buttonPrimary';
 
-const Item = ({ item, navigation }) => (
-    <TouchableOpacity 
-        style={styles.item} 
-        onPress={() => navigation.navigate('createRestaurant', item)}
-    >
-      <Text style={styles.name}>{item.name}</Text>
-    </TouchableOpacity>
-  );
-
-const ModalQrCode = ({ showModal, itens, onPress, navigation }) => {
-    const renderItem = ({ item }) => 
-        <Item 
-            item={item}
-            navigation={navigation} 
-        />
-
+const ModalQrCode = ({ showModal, onPress }) => {
     return (
         <>
             {
                 showModal && (   
                     <View style={styles.modalContainer}>
                         <View style={styles.modalHeader}>
-                            <AntDesign name="close" size={27} onPress={() => onPress(false)} />
+                            <Ionicons name="close" size={27} onPress={() => onPress(false)} />
                         </View>
                         <View>
-                            <Image style={{width: '100%', height: '70%', marginTop: 15, marginBottom: 10}} source={require('../../assets/qrcode.png')} />
+                            <Image style={{width: '70%', height: '70%', marginTop: 15, marginBottom: 10, marginLeft: 30}} source={require('../../assets/qrcode.png')} />
                             <ButtonPrimary text="SALVAR QR CODE"/>
                         </View>
                     </View>
@@ -49,7 +34,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D9',
         paddingRight: 5,
         paddingLeft: 5,
-        justifyContent: 'center'
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        borderRadius: 10
     },
     modalHeader: {
         alignItems: 'flex-end',

@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const RestaurantDetails = ({ navigation }) => {
     return (
-        <>
+        <View>
             <View>
                 <CardDetailRestaurant
                     name={'Melts'}
@@ -18,11 +18,11 @@ const RestaurantDetails = ({ navigation }) => {
                     address={'Rua Horace Clark, 45'}
                 />
             </View>
-                <View style={{ height: '60%' }}>
-                    <BoxMenu />
-                    <BoxCalendar />
-                </View>
-        </>
+            <View style={{ height: '60%' }}>
+                <BoxMenu />
+                <BoxCalendar />
+            </View>
+        </View>
     );
 };
 

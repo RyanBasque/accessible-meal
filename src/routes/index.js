@@ -21,8 +21,8 @@ const Routes = () => {
         }}
       >
         <Stack.Screen name="login" component={Login} />
-        <Stack.Screen name="chatbot" component={Chatbot} />
         <Stack.Screen name="restaurantDetails" component={RestaurantDetails} />
+        <Stack.Screen name="chatbot" component={Chatbot} />
         <Stack.Screen name="user" component={User} />
         <Stack.Screen name="createRestaurant" component={CreateRestaurant} />
         <Stack.Screen name="home" component={Home} />
