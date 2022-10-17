@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Text, Image, ScrollView } from "react-native";
+import { useState } from "react";
+import { 
+    View, 
+    StyleSheet, 
+    TouchableOpacity, 
+    Text, 
+    Image, 
+    ScrollView 
+} from "react-native";
+import { launchImageLibraryAsync, MediaTypeOptions } from 'expo-image-picker';
 import AntDesign from '@expo/vector-icons/AntDesign'
-import * as ImagePicker from 'expo-image-picker';
 
 import Navigator from "../../components/navigator";
 import Input from "../../components/input";
@@ -14,11 +21,10 @@ const CreateRestaurant = ({ route, navigation }) => {
 
     const [name, setName] = useState(params?.name || '');
     const [email, setEmail] = useState(params?.email || '');
-    const [cnpj, setCnpj] = useState('');
-    const [typePCD, setTypePCD] = useState(params?.typePCD || []);
+    const [cnpj, setCnpj] = useState(params?.cnpj || '');
     const [address, setAddress] = useState(params?.address || '');
-    const [menuPhoto, setMenuPhoto] = useState();
-    
+    const [typePCD, setTypePCD] = useState(params?.typePCD || []);
+    const [menuPhoto, setMenuPhoto] = useState(undefined);
 
     const handlePutData = () => { 
         
@@ -28,15 +34,15 @@ const CreateRestaurant = ({ route, navigation }) => {
         setEmail('');
         setName('');
         setCnpj('');
-        setTypePCD([]);
         setAddress('');
+        setTypePCD([]);
         setMenuPhoto(undefined);
     };
 
     const handlePickPhoto = async () => {
         try {
-            const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            const result = await launchImageLibraryAsync({
+                mediaTypes: MediaTypeOptions.Images,
                 allowsEditing: true,
                 aspect: [4, 3],
                 quality: 1,
@@ -45,7 +51,7 @@ const CreateRestaurant = ({ route, navigation }) => {
           
               setMenuPhoto("data:image/png;base64," + result.base64);
         } catch {
-            alert("Error");
+            alert("Import Image Error");
         }
     };
 

@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
 import { useAuth } from '../../context/userContext';
-import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import CreateAccountName from '../../components/createAccountName';
 import CreateAccountEmail from '../../components/createAccountEmail';
@@ -19,6 +17,7 @@ import {
   removeLocalValue, 
   getLocalData,
 } from '../../services/storage';
+import { postData } from '../../services';
 
 function CreateAccount({ navigation }) {
   const { user, storeUser } = useAuth();
@@ -27,44 +26,26 @@ function CreateAccount({ navigation }) {
   const [email, setEmail] = useState('');
   const [cpf, setCpf] = useState('');
   const [address, setAddress] = useState('');
-  const [isPCD, setIsPCD] = useState(true);
-  const [typePCD, setTypePCD] = useState([]);
   const [password, setPassword] = useState('');
+  const [typePCD, setTypePCD] = useState([]);
+  const [isPCD, setIsPCD] = useState(true);
   const [renderingScreen, setRenderingScreen] = useState(0);
-
-  const api = axios.create({ baseURL: 'http://10.0.2.2:8080', })
 
   const register = async () => {
     try {
-      let params;
+      const params = {
+        name: name,
+        email: email,
+        cpf: cpf,
+        address: address,
+        isPCD: isPCD,
+        typePCD: JSON.stringify(typePCD),
+        password: password
+      };
 
-      if (isPCD) {
-        params = {
-          name: name,
-          email: email,
-          cpf: cpf,
-          address: address,
-          isPCD: isPCD,
-          typePCD: JSON.stringify(typePCD),
-          password: password
-        }
-      } else {
-        params = {
-          name: name,
-          email: email,
-          cpf: cpf,
-          address: address,
-          isPCD: isPCD,
-          password: password
-        };
-        
-      }
-
-      await api.post('/api/cliente/', params, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      await postData('/api/cliente/', params);
+      navigation.navigate('login');
+      alert('Usuário cadastrado com sucesso!');
 
     } catch {
       alert("Erro para montar requisição");
@@ -129,10 +110,7 @@ function CreateAccount({ navigation }) {
     }
 
     try {
-      handlePostUserData(undefined, undefined, 7);
       register();
-
-      navigation.navigate('login')
     } catch (error) {
       alert("Erro na requisição");
     }
@@ -146,7 +124,7 @@ function CreateAccount({ navigation }) {
       return;
     }
 
-    if (isPCD === true) {
+    if (isPCD) {
       setName('');
       setEmail('');
       setCpf('');
@@ -156,7 +134,7 @@ function CreateAccount({ navigation }) {
       setPassword('');
       setRenderingScreen((n) => n - 1);
     }
-    else if (isPCD === false) {
+    else {
       setName('');
       setEmail('');
       setCpf('');
