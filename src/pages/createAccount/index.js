@@ -57,12 +57,21 @@ function CreateAccount({ navigation }) {
       alert('Por favor, insira um nome para continuar!');
       return;
     }
+    else if (name.length < 3) {
+      alert('O nome precisa ter mais que 3 letras para continuar!');
+      return;
+    }
     handlePostUserData('name', name, 1);
   }
 
   const handleGetEmail = async () => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (!email) {
       alert('Por favor, insira um email para continuar!');
+      return;
+    }
+    else if (!reg.test(email)) {
+      alert('Por favor, insira um email válido para continuar!');
       return;
     }
 
@@ -72,6 +81,10 @@ function CreateAccount({ navigation }) {
   const handleGetCpf = async () => {
     if (!cpf) {
       alert('Por favor, insira um CPF para continuar!');
+      return;
+    }
+    else if (cpf.length != 11) {
+      alert('CPF inválido!');
       return;
     }
     handlePostUserData('cpf', cpf, 3);
@@ -106,6 +119,10 @@ function CreateAccount({ navigation }) {
   const handleGetPassword = async () => {
     if (!password) {
       alert('Por favor, insira uma senha para continuar!');
+      return;
+    }
+    else if (password.length < 5) {
+      alert('A senha escolhida deve conter pelo menos 5 caracteres.');
       return;
     }
 

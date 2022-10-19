@@ -57,10 +57,15 @@ function Login({ navigation }) {
 
   const login = async (params, biometric = false) => {
     if (!biometric) {
+      let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
       if (!email || !password) {
         alert('Coloque e-mail e senha para continuar!');
         return;
-      };
+      }
+      else if (!reg.test(email)) {
+        alert('E-mail inválido!');
+        return;
+      }
     }
 
     try {
