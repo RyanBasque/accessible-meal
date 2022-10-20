@@ -15,7 +15,7 @@ export function CreateAccountName({ handleGetName, setName, name, handleBackStep
         <Text style={styles.subTitle}>Qual é o seu nome completo?</Text>
 
         <View>
-          <Input placeholder="Nome" onChangeText={setName} defaultValue={name} />
+          <Input placeholder="Nome" autoCapitalize="words" onChangeText={setName} defaultValue={name} />
         </View>
       </View>
       <View style={styles.footer}>

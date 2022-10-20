@@ -12,7 +12,7 @@ import Header from '../../components/header';
 import { useAuth } from '../../context/userContext';
 
 import { postData } from '../../services';
-import { getLocalData, removeLocalValue, storeLocalData } from '../../services/storage';
+import { getLocalData, storeLocalData } from '../../services/storage';
 
 import showConfirmDialog from '../../utils/showConfirmDialog';
 
@@ -32,9 +32,6 @@ function Login({ navigation }) {
       if (hasBiometric) {
         const { success } = await authenticateAsync();
 
-        console.log('sucess', success);
-        console.log('login', response)
-
         if (success) {
           login(response, true);
           return; 
@@ -42,7 +39,7 @@ function Login({ navigation }) {
       } else if (response) {
         setEmail(response.email);
       }
-    };
+    }; 
 
     getUserCredentiais();
   }, []);
@@ -100,13 +97,17 @@ function Login({ navigation }) {
         <Text style={styles.title}>Entrar com seus dados</Text>
       </View>
       <View style={styles.inputContainer}>
-        <Input placeholder="Digite seu email" 
+        <Input 
+          placeholder="Digite seu email" 
           onChangeText={setEmail} 
           defaultValue={email}
-          />
-        <Input placeholder="Digite sua senha" 
+          keyboardType="email-adress"
+        />
+        <Input 
+          placeholder="Digite sua senha" 
           onChangeText={setPassword} 
           defaultValue={password}
+          secureTextEntry          
           />
       </View>
       <View style={styles.buttonContainer}>

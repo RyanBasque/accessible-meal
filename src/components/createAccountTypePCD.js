@@ -6,26 +6,27 @@ import ButtonPrimary from './buttonPrimary';
 import ButtonSecondary from './buttonSecondary';
 import RadioButton from './radioButton';
 
-const CreateAccountTypePCD = ({ setTypePCD, typePCD, handleGetTypePCD, handleBackStep }) => {
+const CreateAccountTypePCD = ({ typePCD, handleGetTypePCD, handleBackStep, handlePressInput }) => {
+
     return (
         <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
         <Header />
         <View style={styles.body}>
           <Text style={styles.title}>Qual é seu tipo de deficiência?</Text>
           <View style={{ marginTop: 40 }}>
-              <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'visual'])}>
+              <TouchableOpacity style={styles.radio} onPress={() => handlePressInput('visual')}>
                 <RadioButton selected={typePCD.includes('visual')} />
                 <Text>Deficiência visual</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'motora'])}>
+              <TouchableOpacity style={styles.radio} onPress={() => handlePressInput('motora')}>
                 <RadioButton selected={typePCD.includes('motora')} />
                 <Text>Deficiência motora</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'mental'])}>
+              <TouchableOpacity style={styles.radio} onPress={() => handlePressInput('mental')}>
                 <RadioButton selected={typePCD.includes('mental')} />
                 <Text>Deficiência mental</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.radio} onPress={() => setTypePCD(atual => [...atual, 'auditiva'])}>
+              <TouchableOpacity style={styles.radio} onPress={() => handlePressInput('auditiva')}>
                 <RadioButton selected={typePCD.includes('auditiva')} />
                 <Text>Deficiência auditiva</Text>
               </TouchableOpacity>

@@ -83,7 +83,7 @@ function CreateAccount({ navigation }) {
       alert('Por favor, insira um CPF para continuar!');
       return;
     }
-    else if (cpf.length != 11) {
+    else if (cpf.length != 14) {
       alert('CPF inválido!');
       return;
     }
@@ -101,6 +101,20 @@ function CreateAccount({ navigation }) {
   const handleGetIsPCD = async () => {
     handlePostUserData('isPCD', isPCD, isPCD ? 5 : 6);
   }
+
+  const handlePressInput = (value) => {
+    if (typePCD.includes(value)) {
+      const clone = new Array(...typePCD);
+      const index = typePCD.indexOf(value);
+      clone.splice(index, 1);
+
+      setTypePCD(clone);
+
+      return;
+    }
+
+    setTypePCD((current) => [...current, value]);
+  };
 
   const handleGetTypePCD = async () => {
     if (!typePCD.length) {
@@ -234,6 +248,7 @@ function CreateAccount({ navigation }) {
       typePCD={typePCD}
       handleGetTypePCD={handleGetTypePCD}
       handleBackStep={handleBackStep}
+      handlePressInput={handlePressInput}
     />,
     <CreateAccountPassword
       setPassword={setPassword}

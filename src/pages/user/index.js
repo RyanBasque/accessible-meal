@@ -11,6 +11,8 @@ import ButtonPrimary from "../../components/buttonPrimary";
 import ButtonSecondary from "../../components/buttonSecondary";
 import Modal from "../../components/modal";
 
+import { removeLocalValue } from '../../services/storage';
+
 const User = ({ navigation }) => {
     const { user } = useAuth();
 
@@ -28,6 +30,12 @@ const User = ({ navigation }) => {
 
     const handleReset = () => {
 
+    };
+
+    const handleLogout = async () => {
+      await removeLocalValue('@userCredentials');
+      await removeLocalValue('@hasBiometric');
+      navigation.navigate('login');
     };
 
     return (
@@ -96,6 +104,7 @@ const User = ({ navigation }) => {
                     </View>
                     <ButtonPrimary text="CONTINUAR" onPress={handlePutData} />
                     <ButtonSecondary text="CANCELAR" onPress={handleReset} />
+                    <ButtonSecondary text="SAIR" onPress={handleLogout} />
                 </View>
             </ScrollView>
             <Navigator navigation={navigation} />
