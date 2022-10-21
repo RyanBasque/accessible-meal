@@ -5,24 +5,27 @@ import Header from './header';
 import Input from './input';
 import ButtonPrimary from './buttonPrimary';
 import ButtonSecondary from './buttonSecondary';
+import KeyboardView from './keyboardView';
 
 export function CreateAccountAddress({ handleGetAddress, setAddress, address, handleBackStep }) {
   return (
-    <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
-      <Header />
-      <View style={styles.body}>
-        <Text style={styles.title}>Também vamos precisar do seu endereço.</Text>
-        <Text style={styles.subTitle}>Onde você mora?</Text>
+    <KeyboardView>
+      <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
+        <Header />
+        <View style={styles.body}>
+          <Text style={styles.title}>Também vamos precisar do seu endereço.</Text>
+          <Text style={styles.subTitle}>Onde você mora?</Text>
 
-        <View>
-          <Input onChangeText={setAddress} defaultValue={address} />
+          <View>
+            <Input onChangeText={setAddress} defaultValue={address} />
+          </View>
+        </View>
+        <View style={styles.footer}>
+          <ButtonPrimary text="CONTINUAR" onPress={handleGetAddress} />
+          <ButtonSecondary text="Cancelar / Voltar" onPress={handleBackStep} />
         </View>
       </View>
-      <View style={styles.footer}>
-        <ButtonPrimary text="CONTINUAR" onPress={handleGetAddress} />
-        <ButtonSecondary text="Cancelar / Voltar" onPress={handleBackStep} />
-      </View>
-    </View>
+    </KeyboardView>
   );
 }
 

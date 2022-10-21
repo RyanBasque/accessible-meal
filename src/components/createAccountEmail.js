@@ -5,29 +5,32 @@ import Header from './header';
 import Input from './input';
 import ButtonPrimary from './buttonPrimary';
 import ButtonSecondary from './buttonSecondary';
+import KeyboardView from './keyboardView';
 
 export function CreateAccountEmail({ setEmail, email, handleGetEmail, handleBackStep }) {
   return (
-    <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
-      <Header />
-      <View style={styles.body}>
-        <Text style={styles.title}>Vamos precisar do seu endereço de email também</Text>
-        <Text style={styles.subTitle}>Pode nos dizer seu email?</Text>
+    <KeyboardView>
+      <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
+        <Header />
+        <View style={styles.body}>
+          <Text style={styles.title}>Vamos precisar do seu endereço de email também</Text>
+          <Text style={styles.subTitle}>Pode nos dizer seu email?</Text>
 
-        <View>
-          <Input 
-            keyboardType="email-address" 
-            placeholder="Email" 
-            onChangeText={setEmail} 
-            defaultValue={email} 
-          />
+          <View>
+            <Input 
+              keyboardType="email-address" 
+              placeholder="Email" 
+              onChangeText={setEmail} 
+              defaultValue={email} 
+            />
+          </View>
+        </View>
+        <View style={styles.footer}>
+          <ButtonPrimary text="CONTINUAR" onPress={handleGetEmail} />
+          <ButtonSecondary text="Cancelar" onPress={handleBackStep} />
         </View>
       </View>
-      <View style={styles.footer}>
-        <ButtonPrimary text="CONTINUAR" onPress={handleGetEmail} />
-        <ButtonSecondary text="Cancelar" onPress={handleBackStep} />
-      </View>
-    </View>
+    </KeyboardView>
   );
 }
 

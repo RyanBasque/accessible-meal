@@ -1,14 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  ActivityIndicator,
+} from 'react-native';
 
-function ButtonPrimary({ isActive, text, ...props }) {
+function ButtonPrimary({ isActive, text, isLoading, ...props }) {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: '#3154C5' }]}
-      disable={!isActive}
       {...props}
     >
-      <Text style={{ color: '#FFFF' }}>{text}</Text>
+      {
+        isLoading ? 
+          <ActivityIndicator size="small" color="#FFFF" /> : 
+          <Text style={{ color: '#FFFF' }}>{text}</Text>
+      }
     </TouchableOpacity>
   );
 }

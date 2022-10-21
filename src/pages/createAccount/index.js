@@ -29,10 +29,12 @@ function CreateAccount({ navigation }) {
   const [password, setPassword] = useState('');
   const [typePCD, setTypePCD] = useState([]);
   const [isPCD, setIsPCD] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [renderingScreen, setRenderingScreen] = useState(0);
 
   const register = async () => {
     try {
+      setIsLoading(true);
       const params = {
         name: name,
         email: email,
@@ -49,6 +51,8 @@ function CreateAccount({ navigation }) {
 
     } catch {
       alert("Erro para montar requisição");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -255,6 +259,7 @@ function CreateAccount({ navigation }) {
       password={password}
       handleGetPassword={handleGetPassword}
       handleBackStep={handleBackStep}
+      isLoading={isLoading}
     />
   ]);
 

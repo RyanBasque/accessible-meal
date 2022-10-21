@@ -21,6 +21,7 @@ function Login({ navigation }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getUserCredentiais = async () => {
@@ -66,6 +67,7 @@ function Login({ navigation }) {
     }
 
     try {
+      setIsLoading(true);
       let { data } = await postData('/api/cliente/login/', params);
 
       const hasLocalData = await getLocalData('@userCredentials');
@@ -87,6 +89,8 @@ function Login({ navigation }) {
     } catch(err) {
       console.log(err);
       alert("E-mal ou senha inválidos.");
+    } finally {
+      setIsLoading(false);z
     }
   }
 
@@ -99,7 +103,7 @@ function Login({ navigation }) {
       <View style={styles.inputContainer}>
         <Input 
           placeholder="Digite seu email" 
-          onChangeText={setEmail} 
+          onChangeText={setEmail}
           defaultValue={email}
           keyboardType="email-adress"
         />
@@ -111,9 +115,16 @@ function Login({ navigation }) {
           />
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonPrimary text="ENTRAR" onPress={() => login({ email, password })} />
+        <ButtonPrimary 
+          text="ENTRAR" 
+          isLoading={isLoading} 
+          onPress={() => login({ email, password })} 
+        />
         <View style={{ marginTop: 30 }}>
-          <ButtonSecondary text="CRIAR CONTA" onPress={() => navigation.navigate('createAccount')} />
+          <ButtonSecondary 
+            text="CRIAR CONTA" 
+            onPress={() => navigation.navigate('createAccount')} 
+          />
         </View>
       </View>
     </View>

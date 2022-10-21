@@ -5,24 +5,27 @@ import Header from './header';
 import Input from './input';
 import ButtonPrimary from './buttonPrimary';
 import ButtonSecondary from './buttonSecondary';
+import KeyboardView from './keyboardView';
 
 export function CreateAccountName({ handleGetName, setName, name, handleBackStep }) {
   return (
-    <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
-      <Header />
-      <View style={styles.body}>
-        <Text style={styles.title}>Você poderia começar se apresentando</Text>
-        <Text style={styles.subTitle}>Qual é o seu nome completo?</Text>
+    <KeyboardView>
+      <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
+        <Header />
+        <View style={styles.body}>
+          <Text style={styles.title}>Você poderia começar se apresentando</Text>
+          <Text style={styles.subTitle}>Qual é o seu nome completo?</Text>
 
-        <View>
-          <Input placeholder="Nome" autoCapitalize="words" onChangeText={setName} defaultValue={name} />
+          <View>
+            <Input placeholder="Nome" autoCapitalize="words" onChangeText={setName} defaultValue={name} />
+          </View>
+        </View>
+        <View style={styles.footer}>
+          <ButtonPrimary text="CONTINUAR" onPress={handleGetName} />
+          <ButtonSecondary text="Cancelar / Voltar" onPress={handleBackStep} />
         </View>
       </View>
-      <View style={styles.footer}>
-        <ButtonPrimary text="CONTINUAR" onPress={handleGetName} />
-        <ButtonSecondary text="Cancelar / Voltar" onPress={handleBackStep} />
-      </View>
-    </View>
+    </KeyboardView>
   );
 }
 
