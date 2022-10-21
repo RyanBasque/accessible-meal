@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
 
 import Header from './header';
 import ButtonPrimary from './buttonPrimary';
@@ -8,10 +9,12 @@ import ButtonSecondary from './buttonSecondary';
 import RadioButton from './radioButton';
 
 function HomeRestaurantModal({ name, classification, typePCD, address }) {
+
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('login')}
-      style={{
+        onPress={() => navigation.navigate('restaurantDetails')} style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderColor: 'gray',

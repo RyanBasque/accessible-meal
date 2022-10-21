@@ -11,17 +11,19 @@ const RestaurantDetails = ({ navigation }) => {
     return (
         <>
             <View>
-                <CardDetailRestaurant
-                    name={'Melts'}
-                    classification={'0.0'}
-                    typePCD={'visual'}
-                    address={'Rua Horace Clark, 45'}
-                />
-            </View>
+                <View>
+                    <CardDetailRestaurant
+                        name={'Melts'}
+                        classification={'0.0'}
+                        typePCD={'visual'}
+                        address={'Rua Horace Clark, 45'}
+                    />
+                </View>
                 <View style={{ height: '60%' }}>
                     <BoxMenu />
                     <BoxCalendar />
                 </View>
+            </View>
         </>
     );
 };

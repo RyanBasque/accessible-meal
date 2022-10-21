@@ -1,16 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import ButtonPrimary from './buttonPrimary';
-
-const Item = ({ item, navigation }) => (
-    <TouchableOpacity 
-        style={styles.item} 
-        onPress={() => navigation.navigate('createRestaurant', item)}
-    >
-      <Text style={styles.name}>{item.name}</Text>
-    </TouchableOpacity>
-  );
 
 const ModalQrCode = ({ showModal, itens, onPress, navigation }) => {
     const renderItem = ({ item }) => 
@@ -25,7 +16,7 @@ const ModalQrCode = ({ showModal, itens, onPress, navigation }) => {
                 showModal && (   
                     <View style={styles.modalContainer}>
                         <View style={styles.modalHeader}>
-                            <AntDesign name="close" size={27} onPress={() => onPress(false)} />
+                            <Ionicons name="close" size={27} onPress={() => onPress(false)} />
                         </View>
                         <View>
                             <Image style={{width: '100%', height: '70%', marginTop: 15, marginBottom: 10}} source={require('../../assets/qrcode.png')} />

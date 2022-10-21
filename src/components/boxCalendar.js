@@ -4,7 +4,7 @@ import ButtonPrimary from './buttonPrimary';
 import { useState } from "react";
 import ModalQrCode from './modalQrCode';
 
-function BoxCalendar({navigation}) {
+function BoxCalendar({ navigation }) {
 
     const [showModal, setShowModal] = useState(false);
     return (
@@ -15,22 +15,25 @@ function BoxCalendar({navigation}) {
             <View>
                 <Image source={require('../../assets/genericuser.png')} />
             </View> */}
-            <View style={{marginTop: 15}}>
+            <View style={{ marginTop: 15 }}>
                 <Text>Comentários</Text>
-                <TextInput 
-                style={{
-                    backgroundColor: '#B9B9B9',
-                    height: 60,
-                    marginBottom: 10
-                }}
+                <TextInput
+                    style={{
+                        backgroundColor: '#B9B9B9',
+                        height: 60,
+                        marginBottom: 10,
+                        borderRadius: 10
+                    }}
                 />
-                <ButtonPrimary text="GERAR QR CODE" onPress={() => setShowModal(true)}/>
+                <ButtonPrimary text="GERAR QR CODE" onPress={() => setShowModal(true)} />
             </View>
-            <ModalQrCode
-                navigation={navigation}
-                showModal={showModal}
-                onPress={setShowModal}
-            />
+            <View >
+                <ModalQrCode
+                    navigation={navigation}
+                    showModal={showModal}
+                    onPress={setShowModal}
+                />
+            </View>
         </View>
 
     );
