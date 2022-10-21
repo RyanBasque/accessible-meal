@@ -55,6 +55,21 @@ const CreateRestaurant = ({ route, navigation }) => {
         }
     };
 
+    const cnpjMask = value => {
+        return value
+        .replace(/\D/g, '')
+        .replace(/(\d{2})(\d)/, '$1.$2') 
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1/$2') 
+        .replace(/(\d{4})(\d)/, '$1-$2') 
+        // .replace(/^(\d{2})(\d{3})?(\d{3})?(\d{4})?(\d{2})?/, "$1. $2. $3/$4-$5");
+    }
+
+    const handleChangeText = (event) => {
+        setCnpj(cnpjMask(event));
+      }
+    
+
     return (
         <>
             <View style={styles.header}>
@@ -84,8 +99,10 @@ const CreateRestaurant = ({ route, navigation }) => {
                     <View style={styles.formInput}>
                         <Input 
                             textLabel="CNPJ" 
-                            onChangeText={setCnpj} 
-                            defaultValue={cnpj} />
+                            onChangeText={handleChangeText}
+                            defaultValue={cnpj}
+                            maxLength={18} 
+                            />
                     </View>
                     <Text>DEFICIÊNCIAS SUPORTADAS</Text>
                     <View style={{ marginTop: 10 }}>

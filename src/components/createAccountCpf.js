@@ -27,7 +27,7 @@ export function CreateAccountCpf({ handleGetCpf, setCpf, cpf, handleBackStep }) 
         <Text style={styles.subTitle}>Qual seu CPF?</Text>
 
         <View>
-          <Input onChangeText={handleChangeText} keyboardType="number" defaultValue={cpf} maxLength='14' />
+          <Input onChangeText={handleChangeText} keyboardType="number" defaultValue={cpf} maxLength={14} />
         </View>
       </View>
       <View style={styles.footer}>

@@ -61,7 +61,7 @@ const User = ({ navigation }) => {
                     <View style={styles.formInput}>
                         <Input textLabel="EMAIL" defaultValue={user.email || ""} />
                     </View>
-                    <Text>DEFICIÊNCIA</Text>
+                    {/* <Text>DEFICIÊNCIA</Text>
                     <View style={{ marginTop: 10 }}>
                         <TouchableOpacity
                             style={styles.radio} 
@@ -85,7 +85,7 @@ const User = ({ navigation }) => {
                             <RadioButton selected={user?.typePCD.includes('auditiva') ||  typePCD.includes('auditiva')} />
                             <Text>Deficiência auditiva</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <View style={styles.formInput}>
                         <Input 
                             secureTextEntry
