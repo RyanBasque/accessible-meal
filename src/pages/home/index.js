@@ -1,83 +1,71 @@
-import { View, FlatList, ScrollView, Text } from 'react-native';
-import Navigator from '../../components/navigator';
-// import { RobotOutlined } from '@ant-design/icons';
-import AntDesign from '@expo/vector-icons/AntDesign'
+import { useEffect, useState } from 'react';
+import { View, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import InputSearch from '../../components/inputSearch'
-import Header from '../../components/header'
-import HomeRestaurantModal from '../../components/homeRestaurantModal'
-import { useState } from 'react';
-import axios from "axios";
+import Navigator from '../../components/navigator';
+import InputSearch from '../../components/inputSearch';
+import RestaurantCard from '../../components/restaurantCard';
+
+import { getData } from '../../services';
 
 const Home = ({ navigation }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [restaurants, setRestaurants] = useState([{ name: 'Test', classification: 1.1, typePCD: ['visual'], address: 'Test Adress' }]);
 
-    const [name, setName] = useState('');
-    const [typePCD, setTypePCD] = useState('');
-    const [address, setAddress] = useState('');
-    const [restaurantList, setRestaurantList] = useState([]);
-    const api = axios.create({ baseURL: 'http://10.0.2.2:8080', })
+  restaurants.map(element => console.log(element.name))
 
-    const loadRestaurants = async () => {
-        try {
-            let req = await api.get('/api/restaurante/').then(
-                function (response) {
-                    var jsonData = JSON.parse(response);
-                    for (var i = 0; i < jsonData.data.length; i++) {
-                        var restaurant = jsonData.data[i];
-                        setRestaurantList(atual => [...atual, restaurant])
-                    }
-                }
-            )
-        } catch (err) {
-            alert('Falha ao resgatar os restaurantes cadastrados')
-            console.log(err)
-        }
+  const getRestaurants = async () => { 
+    try {
+      setIsLoading(true);
+      const response = [{ name: 'Test', classification: 1.1, typePCD: ['visual'], address: 'Test Adress' }];
+ 
+      setRestaurants(response);
+    } catch { 
+      alert('Erro durante a requisição');
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  // useEffect(() => {
+  //   getRestaurants();
+  // }, []);
     return (
         <>
-            <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
-                <Header />
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
-                    <InputSearch placeholder={'Busque por restaurante'} />
+            <View style={{ flexDirection: 'column', height: '100%', backgroundColor: '#3154C5', paddingTop: 10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 20, paddingHorizontal: 20, alignItems: 'center' }} >
+                    <InputSearch 
+                        placeholder='Busque por restaurante' 
+                        style={{ color: '#FFFF', borderBottomColor: 'rgba(255, 255, 255, 0.21)', borderBottomWidth: 2, width: '90%', paddingVertical: 10 }} 
+                        placeholderTextColor="#FFFF"
+                    />
+                    <TouchableOpacity onPress={() => console.log('Find')}>
+                      <Ionicons name="search" size={20} color="white" />
+                    </TouchableOpacity>
                 </View>
-                <ScrollView>
-                    <HomeRestaurantModal
-                        name={'Melts'}
-                        classification={'0.0'}
-                        typePCD={'visual'}
-                        address={'Rua Horace Clark, 45'} />
-                    <HomeRestaurantModal
-                        name={'Cantareira Ltda'}
-                        classification={'0.0'}
-                        typePCD={'mental'}
-                        address={'Rua Orlando de Morais, 1010'} />
-                    <HomeRestaurantModal
-                        name={'Food True'}
-                        classification={'0.0'}
-                        typePCD={'motora'}
-                        address={'Av Nazaréh, 2456'} />
-                    <HomeRestaurantModal
-                        name={'Saborosos Pratos Ltda'}
-                        classification={'0.0'}
-                        typePCD={'auditiva'}
-                        address={'Av Santos Silva, 81'} />
-                    <HomeRestaurantModal
-                        name={'Delicias Casa da Vovó Ltda'}
-                        classification={'0.0'}
-                        typePCD={'auditiva'}
-                        address={'Av Santos Silva, 81'} />
-                    <HomeRestaurantModal
-                        name={'Restaurante da cidade'}
-                        classification={'0.0'}
-                        typePCD={'auditiva'}
-                        address={'Av Santos Silva, 81'} />
-                </ScrollView>
-                {/* <FlatList
-                    data={restaurantList}
-                    renderItem={(obj) => (
-                      <HomeRestaurantModal {...obj} />
-                    )}
-                /> */}
+                <View style={{ backgroundColor: '#FFFF', paddingHorizontal: 20, height: '100%', borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                  {
+                    isLoading ? <ActivityIndicator size="small" color="#FFFF" />  : (
+                      <ScrollView style={{ marginTop: 20 }}>
+                        {/* {restaurants.map(({ name, classification, typePCD, address }) => {
+                          <RestaurantCard
+                            name={name}
+                            classification={classification}
+                            typePCD={typePCD}
+                            address={address}
+                          />
+                        })} */}
+
+                        <RestaurantCard
+                            name='Test'
+                            classification={1.2}
+                            typePCD={['visual']}
+                            address='Test Adress'
+                          />
+                      </ScrollView>
+                    )
+                  }
+                </View>
             </View>
             <Navigator navigation={navigation} />
         </>
