@@ -1,5 +1,5 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import React from "react";
+import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
 function ButtonSecondary({ text, ...props }) {
   return (
@@ -12,9 +12,9 @@ function ButtonSecondary({ text, ...props }) {
 const styles = StyleSheet.create({
   button: {
     height: 50,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

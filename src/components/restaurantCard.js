@@ -22,12 +22,12 @@ const ItensList = ({ typePCD }) => {
   )
 }
 
-const RestaurantCard = ({ name, classification, typePCD, address }) => {
+const RestaurantCard = ({ name, classification, typePCD, address, profilePic }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('restaurantDetails', { name, classification, typePCD, address })}
+      onPress={() => navigation.navigate('restaurantDetails', { name, classification, typePCD, address, profilePic })}
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -43,7 +43,7 @@ const RestaurantCard = ({ name, classification, typePCD, address }) => {
           flexDirection: 'column',
           justifyContent: 'center',
         }}>
-        <Image style={styles.img} source={require('../../assets/logoRestaurante4.png')} />
+        <Image style={styles.img} source={profilePic} />
       </View>
       <View
         style={{

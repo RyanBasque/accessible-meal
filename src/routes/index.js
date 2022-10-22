@@ -1,13 +1,13 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import CreateAccount from '../pages/createAccount';
-import Login from '../pages/login';
-import Chatbot from '../pages/chatbot';
-import Home from '../pages/home';
-import User from '../pages/user'; 
-import CreateRestaurant from '../pages/createRestaurant';
-import RestaurantDetails from '../pages/restaurantDetails'
+import CreateAccount from "../pages/createAccount";
+import Login from "../pages/login";
+import Chatbot from "../pages/chatbot";
+import Home from "../pages/home";
+import User from "../pages/user";
+import CreateRestaurant from "../pages/createRestaurant";
+import RestaurantDetails from "../pages/restaurantDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ const Routes = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          animation: 'none',
+          animation: "none",
         }}
       >
         <Stack.Screen name="login" component={Login} />

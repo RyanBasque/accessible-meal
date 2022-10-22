@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
 
-import AuthProvider from './src/context/userContext';
+import AuthProvider from "./src/context/userContext";
 
-import Routes from './src/routes';
+import Routes from "./src/routes";
 
 export default function App() {
   return (

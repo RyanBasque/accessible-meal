@@ -1,70 +1,99 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ItensList = ({ typePCD }) => {
   return (
-      <>
-        {
-          typePCD.length < 4 ? typePCD.map((item, index) => {
-            return (
-              <>
-                <Text style={{ marginRight: 5, marginLeft: 5, color: '#FFFF', fontWeight: '500' }}>{item}</Text>
-                {
-                  (typePCD.length - 1) !== index ? <Text style={{ color: '#FFFF' }}>·</Text> : <></>
-                } 
-              </>
-            )
-          }) : <Text style={{ marginRight: 5, marginLeft: 5 }}>Todos</Text>
-        }
-      </>
-  )
-}
+    <>
+      {typePCD.length < 4 ? (
+        typePCD.map((item, index) => {
+          return (
+            <>
+              <Text
+                style={{
+                  marginRight: 5,
+                  marginLeft: 5,
+                  color: "#FFFF",
+                  fontWeight: "500",
+                }}
+              >
+                {item}
+              </Text>
+              {typePCD.length - 1 !== index ? (
+                <Text style={{ color: "#FFFF" }}>·</Text>
+              ) : (
+                <></>
+              )}
+            </>
+          );
+        })
+      ) : (
+        <Text style={{ marginRight: 5, marginLeft: 5 }}>Todos</Text>
+      )}
+    </>
+  );
+};
 
-const CardDetailRestaurant = ({ name, classification, typePCD, address }) => {
+const CardDetailRestaurant = ({
+  name,
+  classification,
+  typePCD,
+  address,
+  profilePic,
+}) => {
   return (
     <View
       style={{
-        flexDirection: 'row',
+        flexDirection: "row",
         marginVertical: 4,
         paddingTop: 30,
         marginHorizontal: 16,
         marginTop: 0,
-        marginBottom: 20
-      }}>
+        marginBottom: 20,
+      }}
+    >
       <View
         style={{
           width: 85,
           height: 85,
-          backgroundColor: '#ffff',
+          backgroundColor: "#ffff",
           borderRadius: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: "center",
+          alignItems: "center",
           marginRight: 10,
-        }}>
-        <Image style={styles.img} source={require('../../assets/logoRestaurante4.png')} />
+        }}
+      >
+        <Image style={styles.img} source={profilePic} />
       </View>
       <View
         style={{
           flex: 3,
-          flexDirection: 'column'
-        }}>
+          flexDirection: "column",
+        }}
+      >
         <View style={{ marginBottom: 10 }}>
-          <Text style={{ fontWeight: '600', fontSize: 15, color: '#FFFF' }}>
+          <Text style={{ fontWeight: "600", fontSize: 15, color: "#FFFF" }}>
             {name}
           </Text>
         </View>
-        <View style={{ marginBottom: 10, flexDirection: 'row', marginTop: 5 }}>
-            <Ionicons name="heart-outline" size={14} color='#F76647' style={{ marginRight: 5 }} />
-            <Text style={{ marginRight: 5, color: '#F76647' }}>
-              {classification}
-            </Text>
-            <Text>·</Text>
-            <ItensList typePCD={typePCD} />
+        <View style={{ marginBottom: 10, flexDirection: "row", marginTop: 5 }}>
+          <Ionicons
+            name="heart-outline"
+            size={14}
+            color="#F76647"
+            style={{ marginRight: 5 }}
+          />
+          <Text style={{ marginRight: 5, color: "#F76647" }}>
+            {classification}
+          </Text>
+          <Text>·</Text>
+          <ItensList typePCD={typePCD} />
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 3 }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 3 }}
+        >
           <Ionicons name="locate" color="#FFFF" size={14} />
-          <Text style={{ marginLeft: 5, fontWeight: '500', color: '#FFFF' }}>
+          <Text style={{ marginLeft: 5, fontWeight: "500", color: "#FFFF" }}>
             {address}
           </Text>
         </View>
@@ -75,13 +104,13 @@ const CardDetailRestaurant = ({ name, classification, typePCD, address }) => {
 
 const styles = StyleSheet.create({
   body: {
-    justifyContent: 'center',
+    justifyContent: "center",
     marginTop: 55,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
     fontSize: 26,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   img: {
     width: 60,
@@ -93,19 +122,18 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   footer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
-    width: '110%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "110%",
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 22,
   },
   radio: {
     marginVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
-
 
 export default CardDetailRestaurant;

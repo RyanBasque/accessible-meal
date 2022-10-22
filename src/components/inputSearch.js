@@ -1,7 +1,7 @@
-import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import React from "react";
+import { TextInput, StyleSheet } from "react-native";
 
-function InputSearch({ textLabel, ...props }) {
+const InputSearch = ({ textLabel, ...props }) => {
   return (
     <TextInput
       style={styles.input}
@@ -10,19 +10,19 @@ function InputSearch({ textLabel, ...props }) {
       {...props}
     />
   );
-}
+};
 
 export default InputSearch;
 
 export const styles = StyleSheet.create({
   label: {
-    position: 'absolute',
+    position: "absolute",
   },
   input: {
-    width: '100%',
+    width: "100%",
     height: 40,
     marginVertical: 12,
     borderBottomWidth: 1,
-    color: 'black',
+    color: "black",
   },
 });

@@ -1,32 +1,32 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from "react";
 
-import { useAuth } from '../../context/userContext';
+import { useAuth } from "../../context/userContext";
 
-import CreateAccountName from '../../components/createAccountName';
-import CreateAccountEmail from '../../components/createAccountEmail';
-import CreateAccountCpf from '../../components/createAccountCpf';
-import CreateAccountAddress from '../../components/createAccountAddress';
-import CreateAccountIsPCD from '../../components/createAccountIsPCD';
-import CreateAccountTypePCD from '../../components/createAccountTypePCD';
-import CreateAccountPassword from '../../components/createAccountPassword';
+import CreateAccountName from "../../components/createAccountName";
+import CreateAccountEmail from "../../components/createAccountEmail";
+import CreateAccountCpf from "../../components/createAccountCpf";
+import CreateAccountAddress from "../../components/createAccountAddress";
+import CreateAccountIsPCD from "../../components/createAccountIsPCD";
+import CreateAccountTypePCD from "../../components/createAccountTypePCD";
+import CreateAccountPassword from "../../components/createAccountPassword";
 
-import showConfirmDialog from '../../utils/showConfirmDialog';
+import showConfirmDialog from "../../utils/showConfirmDialog";
 
 import {
-  storeLocalData, 
-  removeLocalValue, 
+  storeLocalData,
+  removeLocalValue,
   getLocalData,
-} from '../../services/storage';
-import { postData } from '../../services';
+} from "../../services/storage";
+import { postData } from "../../services";
 
 function CreateAccount({ navigation }) {
   const { user, storeUser } = useAuth();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [address, setAddress] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
   const [typePCD, setTypePCD] = useState([]);
   const [isPCD, setIsPCD] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,69 +42,65 @@ function CreateAccount({ navigation }) {
         address: address,
         isPCD: isPCD,
         typePCD: JSON.stringify(typePCD),
-        password: password
+        password: password,
       };
 
-      await postData('/api/cliente/', params);
-      navigation.navigate('login');
-      alert('Usuário cadastrado com sucesso!');
-
+      await postData("/api/cliente/", params);
+      navigation.navigate("login");
+      alert("Usuário cadastrado com sucesso!");
     } catch {
       alert("Erro para montar requisição");
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const handleGetName = async () => {
     if (!name) {
-      alert('Por favor, insira um nome para continuar!');
+      alert("Por favor, insira um nome para continuar!");
+      return;
+    } else if (name.length < 3) {
+      alert("O nome precisa ter mais que 3 letras para continuar!");
       return;
     }
-    else if (name.length < 3) {
-      alert('O nome precisa ter mais que 3 letras para continuar!');
-      return;
-    }
-    handlePostUserData('name', name, 1);
-  }
+    handlePostUserData("name", name, 1);
+  };
 
   const handleGetEmail = async () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (!email) {
-      alert('Por favor, insira um email para continuar!');
+      alert("Por favor, insira um email para continuar!");
       return;
-    }
-    else if (!reg.test(email)) {
-      alert('Por favor, insira um email válido para continuar!');
+    } else if (!reg.test(email)) {
+      alert("Por favor, insira um email válido para continuar!");
       return;
     }
 
-    handlePostUserData('email', email, 2);
-  }
+    handlePostUserData("email", email, 2);
+  };
 
   const handleGetCpf = async () => {
     if (!cpf) {
-      alert('Por favor, insira um CPF para continuar!');
+      alert("Por favor, insira um CPF para continuar!");
+      return;
+    } else if (cpf.length != 14) {
+      alert("CPF inválido!");
       return;
     }
-    else if (cpf.length != 14) {
-      alert('CPF inválido!');
-      return;
-    }
-    handlePostUserData('cpf', cpf, 3);
-  }
+    handlePostUserData("cpf", cpf, 3);
+  };
 
   const handleGetAddress = async () => {
     if (!address) {
-      alert('Por favor, insira um endereço para continuar!');
+      alert("Por favor, insira um endereço para continuar!");
       return;
     }
-    handlePostUserData('address', address, 4);
-  }
+    handlePostUserData("address", address, 4);
+  };
 
   const handleGetIsPCD = async () => {
-    handlePostUserData('isPCD', isPCD, isPCD ? 5 : 6);
-  }
+    handlePostUserData("isPCD", isPCD, isPCD ? 5 : 6);
+  };
 
   const handlePressInput = (value) => {
     if (typePCD.includes(value)) {
@@ -126,21 +122,17 @@ function CreateAccount({ navigation }) {
       return;
     }
 
-    showConfirmDialog(
-      "Continuar", 
-      "Tem certeza que deseja continuar?",
-      () => 
-      handlePostUserData('typePCD', typePCD, 6),
+    showConfirmDialog("Continuar", "Tem certeza que deseja continuar?", () =>
+      handlePostUserData("typePCD", typePCD, 6)
     );
   };
 
   const handleGetPassword = async () => {
     if (!password) {
-      alert('Por favor, insira uma senha para continuar!');
+      alert("Por favor, insira uma senha para continuar!");
       return;
-    }
-    else if (password.length < 5) {
-      alert('A senha escolhida deve conter pelo menos 5 caracteres.');
+    } else if (password.length < 5) {
+      alert("A senha escolhida deve conter pelo menos 5 caracteres.");
       return;
     }
 
@@ -153,30 +145,29 @@ function CreateAccount({ navigation }) {
 
   const handleBackStep = async () => {
     if (!renderingScreen) {
-      setName('');
+      setName("");
       setRenderingScreen(0);
 
       return;
     }
 
     if (isPCD) {
-      setName('');
-      setEmail('');
-      setCpf('');
-      setAddress('');
+      setName("");
+      setEmail("");
+      setCpf("");
+      setAddress("");
       setIsPCD(true);
       setTypePCD([]);
-      setPassword('');
+      setPassword("");
       setRenderingScreen((n) => n - 1);
-    }
-    else {
-      setName('');
-      setEmail('');
-      setCpf('');
-      setAddress('');
+    } else {
+      setName("");
+      setEmail("");
+      setCpf("");
+      setAddress("");
       setIsPCD(true);
       setTypePCD([]);
-      setPassword('');
+      setPassword("");
       setRenderingScreen((n) => n - 2);
     }
   };
@@ -184,7 +175,7 @@ function CreateAccount({ navigation }) {
   const handlePostUserData = async (key, data, index) => {
     const userWithoutPassword = user;
     if (userWithoutPassword) {
-      delete userWithoutPassword['password'];
+      delete userWithoutPassword["password"];
     }
 
     if (key && data) {
@@ -193,19 +184,19 @@ function CreateAccount({ navigation }) {
     }
 
     if (index === stepScreen.length) {
-      const localUserData =  await getLocalData('@user');
+      const localUserData = await getLocalData("@user");
 
       if (!localUserData) {
         try {
-          await storeLocalData('@user', userWithoutPassword);
+          await storeLocalData("@user", userWithoutPassword);
         } catch (error) {
           console.error(error);
           alert("Erro na requisição");
         }
       } else {
         try {
-          await removeLocalValue('@user');
-          await storeLocalData('@user', userWithoutPassword);
+          await removeLocalValue("@user");
+          await storeLocalData("@user", userWithoutPassword);
         } catch (error) {
           console.error(error);
           alert("Erro na requisição");
@@ -216,12 +207,15 @@ function CreateAccount({ navigation }) {
     setRenderingScreen(index);
   };
 
-  const stepScreen = useMemo(() => [ 
+  const stepScreen = useMemo(() => [
     <CreateAccountName
       setName={setName}
       name={name}
       handleGetName={handleGetName}
-      handleBackStep={() => { handleBackStep(); navigation.navigate('login') }}
+      handleBackStep={() => {
+        handleBackStep();
+        navigation.navigate("login");
+      }}
     />,
     <CreateAccountEmail
       setEmail={setEmail}
@@ -260,14 +254,10 @@ function CreateAccount({ navigation }) {
       handleGetPassword={handleGetPassword}
       handleBackStep={handleBackStep}
       isLoading={isLoading}
-    />
+    />,
   ]);
 
-  return (
-    <>
-      {stepScreen[renderingScreen]}
-    </>
-  );
+  return <>{stepScreen[renderingScreen]}</>;
 }
 
 export default CreateAccount;

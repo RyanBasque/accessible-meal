@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext({ name: '', email: '' });
+const AuthContext = createContext({ name: "", email: "" });
 
 function AuthProvider({ children }) {
   const [user, storeUser] = useState();
@@ -12,7 +12,7 @@ function AuthProvider({ children }) {
         user,
         storeUser,
         resturant,
-        setRestaurant
+        setRestaurant,
       }}
     >
       {children}

@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { Text, View, StyleSheet } from "react-native";
 
-import Header from './header';
-import Input from './input';
-import ButtonPrimary from './buttonPrimary';
-import ButtonSecondary from './buttonSecondary';
-import KeyboardView from './keyboardView';
+import Header from "./header";
+import Input from "./input";
+import ButtonPrimary from "./buttonPrimary";
+import ButtonSecondary from "./buttonSecondary";
+import KeyboardView from "./keyboardView";
 
-export function CreateAccountAddress({ handleGetAddress, setAddress, address, handleBackStep }) {
+export function CreateAccountAddress({
+  handleGetAddress,
+  setAddress,
+  address,
+  handleBackStep,
+}) {
   return (
     <KeyboardView>
-      <View style={{ flexDirection: 'column', paddingHorizontal: 20, height: '100%' }}>
+      <View
+        style={{
+          flexDirection: "column",
+          paddingHorizontal: 20,
+          height: "100%",
+        }}
+      >
         <Header />
         <View style={styles.body}>
-          <Text style={styles.title}>Também vamos precisar do seu endereço.</Text>
+          <Text style={styles.title}>
+            Também vamos precisar do seu endereço.
+          </Text>
           <Text style={styles.subTitle}>Onde você mora?</Text>
 
           <View>
@@ -31,28 +44,28 @@ export function CreateAccountAddress({ handleGetAddress, setAddress, address, ha
 
 const styles = StyleSheet.create({
   body: {
-    justifyContent: 'center',
+    justifyContent: "center",
     marginTop: 55,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
     fontSize: 26,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   subTitle: {
     fontSize: 22,
     marginTop: 8,
   },
   footer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
-    width: '110%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "110%",
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 22,
   },
   input: {
-    color: '#0000',
+    color: "#0000",
   },
 });
 
