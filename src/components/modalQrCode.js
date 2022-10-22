@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons'
 import ButtonPrimary from './buttonPrimary';
 
@@ -13,8 +13,8 @@ const ModalQrCode = ({ showModal, onPress }) => {
                             <Ionicons name="close" size={27} onPress={() => onPress(false)} />
                         </View>
                         <View>
-                            <Image style={{width: '100%', height: '70%', marginTop: 15, marginBottom: 10}} source={require('../../assets/qrcode.png')} />
-                            <ButtonPrimary text="SALVAR QR CODE"/>
+                            <Image style={{ width: '100%', height: '70%', marginTop: 15, marginBottom: 25, borderRadius: 10 }} source={require('../../assets/qrcode.png')} />
+                            <ButtonPrimary text="SALVAR QR CODE" onPress={() => onPress(false)} />
                         </View>
                     </View>
                 )
@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
     modalContainer: {
         width: '100%',
         position: 'absolute',
-        height: 470,
-        bottom: 0,
+        height: 400,
+        bottom: 70,
         backgroundColor: '#D9D9D9',
-        paddingRight: 5,
-        paddingLeft: 5,
+        paddingRight: 20,
+        paddingLeft: 20,
         flexDirection: 'column',
         justifyContent: 'space-around',
         borderRadius: 5

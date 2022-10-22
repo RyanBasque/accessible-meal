@@ -1,28 +1,46 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import Header from './header';
-import ButtonPrimary from './buttonPrimary';
-import ButtonSecondary from './buttonSecondary';
-import RadioButton from './radioButton';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+const ItensList = ({ typePCD }) => {
+  return (
+      <>
+        {
+          typePCD.length < 4 ? typePCD.map((item, index) => {
+            return (
+              <>
+                <Text style={{ marginRight: 5, marginLeft: 5, color: '#FFFF', fontWeight: '500' }}>{item}</Text>
+                {
+                  (typePCD.length - 1) !== index ? <Text style={{ color: '#FFFF' }}>·</Text> : <></>
+                } 
+              </>
+            )
+          }) : <Text style={{ marginRight: 5, marginLeft: 5 }}>Todos</Text>
+        }
+      </>
+  )
+}
 
-function CardDetailRestaurant({ name, classification, typePCD, address }) {
+const CardDetailRestaurant = ({ name, classification, typePCD, address }) => {
   return (
     <View
       style={{
         flexDirection: 'row',
-        justifyContent: 'space-between',
         marginVertical: 4,
-        padding: 30,
+        paddingTop: 30,
+        marginHorizontal: 16,
         marginTop: 0,
-        backgroundColor: '#3154C5'
+        marginBottom: 20
       }}>
       <View
         style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'center'
+          width: 85,
+          height: 85,
+          backgroundColor: '#ffff',
+          borderRadius: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginRight: 10,
         }}>
         <Image style={styles.img} source={require('../../assets/logoRestaurante4.png')} />
       </View>
@@ -31,15 +49,25 @@ function CardDetailRestaurant({ name, classification, typePCD, address }) {
           flex: 3,
           flexDirection: 'column'
         }}>
-        <Text style={{ fontWeight: 'normal', fontSize: 19, color: '#fff' }}>
-          {name}
-        </Text>
-        <Text style={{ fontWeight: 'light', fontSize: 14, color: '#fff' }}>
-          {classification} - {typePCD}
-        </Text>
-        <Text style={{ fontWeight: 'light', fontSize: 14, color: '#fff' }}>
-          {address}
-        </Text>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={{ fontWeight: '600', fontSize: 15, color: '#FFFF' }}>
+            {name}
+          </Text>
+        </View>
+        <View style={{ marginBottom: 10, flexDirection: 'row', marginTop: 5 }}>
+            <Ionicons name="heart-outline" size={14} color='#F76647' style={{ marginRight: 5 }} />
+            <Text style={{ marginRight: 5, color: '#F76647' }}>
+              {classification}
+            </Text>
+            <Text>·</Text>
+            <ItensList typePCD={typePCD} />
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 3 }}>
+          <Ionicons name="locate" color="#FFFF" size={14} />
+          <Text style={{ marginLeft: 5, fontWeight: '500', color: '#FFFF' }}>
+            {address}
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -56,9 +84,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   img: {
-    width: '90%',
+    width: 60,
     height: 60,
-    marginLeft: 5
+    marginLeft: 5,
   },
   subTitle: {
     fontSize: 22,
